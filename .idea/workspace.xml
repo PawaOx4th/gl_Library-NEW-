@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64f271e2-a10e-467e-9e6b-c88cf33d888b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="64f271e2-a10e-467e-9e6b-c88cf33d888b" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -138,12 +136,12 @@
       <workItem from="1561446738972" duration="5265000" />
       <workItem from="1561452064828" duration="246000" />
       <workItem from="1561453246525" duration="567000" />
-      <workItem from="1561455801661" duration="191000" />
+      <workItem from="1561455801661" duration="521000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22741000" />
+    <option name="totallyTimeSpent" value="23071000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -157,7 +155,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49848714" visible="true" weight="0.9489796" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49848714" weight="0.9489796" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49924356" weight="0.27210885" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
