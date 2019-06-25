@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) {
 	//************************* Login Section *************************//
         Scanner pos = new Scanner(System.in);
+        System.out.println("Welcome to GL-Library!!!");
         System.out.println("Please enter your position");
         System.out.println("1 - Administrator");
         System.out.println("2 - Employee");
