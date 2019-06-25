@@ -1,11 +1,13 @@
 package com.company;
 
+import java.util.Date;
 import java.util.Objects;
 
 class Book {
-    public String bookname;
-    public String bookcategory;
-    public String bookcode;
+    //====================== Variable Section ========================//
+    public String bookname,bookcategory,bookcode,bookstatus;
+    public Date rent,back;
+
 
     //====================== Getter Section ========================//
     public String getBookname() {
@@ -38,7 +40,12 @@ class Book {
         this.bookcategory = bookcategory;
         this.bookcode = bookcode;
     }
-
+    public Book(String bookname, String bookcategory, String bookcode, String bookstatus) {
+        this.bookname = bookname;
+        this.bookcategory = bookcategory;
+        this.bookcode = bookcode;
+        this.bookstatus = bookstatus;
+    }
 
     //====================== To String Section ========================//
     @Override
@@ -47,5 +54,18 @@ class Book {
                 "Book Name = " + bookname +
                 " | Book Category = " + bookcategory +
                 " | Book Code = " + bookcode + '}';
+    }
+    //====================== Equal Section ========================//
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(bookcode, book.bookcode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bookcode);
     }
 }
