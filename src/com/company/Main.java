@@ -59,26 +59,26 @@ public class Main {
                         //************************* Remove Section *************************//
                         Scanner dc = new Scanner(System.in);
                         System.out.println("\nPlease insert Book code to delete : ");
-                        int re = dc.nextInt();
+                        String id = dc.nextLine();
+                        deletebook(id,books);
 
-                        for (Book book : books) {
-                            if (book.bookcode.equals(re)) {
-                                books.remove(book.getBookcode());
-                            }
-
+                        System.out.println("this is book in list : ");
+                        for (int i = 0; i < books.size(); i++) {
+                            System.out.println(books.get(i));
                         }
+                        break;
 
 //                        for (int i = 0; i < books.size(); i++) {
 //                            System.out.println(books.get(i));
 //                            System.out.println(i);
 //                        }
-                        break;
+
                     case 3:
                         //************************* Search Section *************************//
                         Scanner sh = new Scanner(System.in);
                         System.out.println("press Enter CODE BOOK : ");
-                        String id = sh.nextLine();
-                        searchBook(id,books);
+                        String id2 = sh.nextLine();
+                        searchBook(id2,books);
                         break;
                     case 4:
                         break;
@@ -116,7 +116,17 @@ public class Main {
             }
         }
     }
+    public static void deletebook(String id,List<Book> books){
+        Iterator<Book> iterator = books.iterator();
+        while (iterator.hasNext()){
+            Book book = iterator.next();
+            if (book.getBookcode().equals(id)){
+                iterator.remove();
+                System.out.println("Book code : ["+book.bookcode+ "] has been delete.");
 
+            }
+        }
+    }
 }
 
 
