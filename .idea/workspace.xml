@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64f271e2-a10e-467e-9e6b-c88cf33d888b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="64f271e2-a10e-467e-9e6b-c88cf33d888b" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -138,16 +136,25 @@
       <workItem from="1561446738972" duration="5265000" />
       <workItem from="1561452064828" duration="246000" />
       <workItem from="1561453246525" duration="567000" />
+<<<<<<< HEAD
       <workItem from="1561455801661" duration="191000" />
       <workItem from="1561456503702" duration="923000" />
+=======
+      <workItem from="1561455801661" duration="1121000" />
+>>>>>>> 9d1aec1b08c8631c851a5cffc4b5c9f96e4465bf
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="23664000" />
+=======
+    <option name="totallyTimeSpent" value="23671000" />
+>>>>>>> 9d1aec1b08c8631c851a5cffc4b5c9f96e4465bf
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.059757944" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -158,7 +165,11 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49848714" visible="true" weight="0.9476268" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49848714" weight="0.9489796" />
+>>>>>>> 9d1aec1b08c8631c851a5cffc4b5c9f96e4465bf
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49924356" weight="0.27210885" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
