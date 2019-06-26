@@ -3,6 +3,7 @@ package com.company;
 //import java.util.ArrayList;
 //import java.util.List;
 //import java.util.Iterator;
+import java.io.FileWriter;
 import java.util.*;
 
 public class Main {
@@ -30,29 +31,31 @@ public class Main {
                 switch (ans_2) {
                     //************************* Add Section *************************//
                     case 1:
-                        Book book_add = new Book();
-                        Scanner sb1 = new Scanner(System.in);
-                        System.out.print("Please enter book name : ");
-                        String bName = sb1.nextLine();
-                        System.out.println("Book name : " + bName);
-                        Scanner sb2 = new Scanner(System.in);
-                        System.out.print("Please enter book category : ");
-                        String bCat = sb1.nextLine();
-                        System.out.println("Book name : " + bCat);
-                        Scanner sb3 = new Scanner(System.in);
-                        System.out.print("Please enter book code : ");
-                        String bCode = sb1.nextLine();
-                        System.out.println("Book name : " + bCode);
+                            Book book_add = new Book();
+                            Scanner sb1 = new Scanner(System.in);
+                            System.out.print("Please enter book name : ");
+                            String bName = sb1.nextLine();
+                            System.out.println("Book name : " + bName);
+                            Scanner sb2 = new Scanner(System.in);
+                            System.out.print("Please enter book category : ");
+                            String bCat = sb1.nextLine();
+                            System.out.println("Book name : " + bCat);
+                            Scanner sb3 = new Scanner(System.in);
+                            System.out.print("Please enter book code : ");
+                            String bCode = sb1.nextLine();
+                            System.out.println("Book name : " + bCode);
 
-                        book_add.bookname = bName;
-                        book_add.bookcategory = bCat;
-                        book_add.bookcode = bCode;
-                        book_add.bookstatus = "Exist";
-                        books.add(book_add);
+                            book_add.bookname = bName;
+                            book_add.bookcategory = bCat;
+                            book_add.bookcode = bCode;
+                            book_add.bookstatus = "Exist";
 
-                        for (int i = 0; i < books.size(); i++) {
-                            System.out.println(books.get(i));
-                        }
+                            books.add(book_add);
+                            System.out.println("=====================");
+                            for (int i = 0; i < books.size(); i++) {
+                                System.out.println(books.get(i));
+                            }
+                            System.out.println("=====================");
                         break;
                     case 2:
                         //************************* Remove Section *************************//
@@ -61,10 +64,12 @@ public class Main {
                         String id = dc.nextLine();
                         deletebook(id,books);
 
+                        System.out.println("=====================");
                         System.out.println("this is book in list : ");
                         for (int i = 0; i < books.size(); i++) {
                             System.out.println(books.get(i));
                         }
+                        System.out.println("=====================");
 //                        Scanner dc = new Scanner(System.in);
 //                        System.out.println("\nPlease insert Book code to delete : ");
 //                        int re = dc.nextInt();
@@ -100,43 +105,72 @@ public class Main {
             }
         while (loop);
         }
-        else
+        else{
             if (ans_1 == 2){
                 //************************* Employee Section *************************//
+                boolean loop = true;
+                Scanner  want = new Scanner(System.in);
+                //************************* Add Component *************************//
+                List<Book> books = new ArrayList<>();
+                do {
+                    System.out.println("\nWhat  do you want to do");
+                    System.out.println("1 - Search\n2 - Check\n3 - Rental\n4 - Return\n5-Exit");
+                    int ans_2 = want.nextInt();
+                    switch (ans_2) {
+                        case 1 :
+                            break;
+                        case 2 :
+                            break;
+                        case 3 :
+                            break;
+                        case 4 :
+                            break;
+
+                        default: loop = false;
+                    }
+                }while (loop);
             }
             else {
                 System.out.println("Sorry please connect again later");
             }
-    }
-    //************************* Search Component *************************//
-    public static void searchBook(String id,List<Book>books){
-        Iterator<Book> iterator = books.iterator();
-        while (iterator.hasNext()){
-            Book book = iterator.next();
-            if (book.getBookcode().equals(id)){
-                System.out.println("==========================");
-                System.out.println("Book Name : " +book.bookname);
-                System.out.println("Book Type : " +book.bookcategory);
-                System.out.println("Book Code : " +book.bookcode);
-                System.out.println("==========================");
-            }
-            else
-                System.out.println("'Sorry your book is not exist to my Grouplease Library");
         }
     }
-    //************************* Remove Component *************************//
-    public static void deletebook(String id,List<Book> books){
-        Iterator<Book> iterator = books.iterator();
-        while (iterator.hasNext()){
-            Book book = iterator.next();
-            if (book.getBookcode().equals(id)){
-                iterator.remove();
-                System.out.println("Book code : ["+book.bookcode+ "] has been delete.");
+
+        //************************* Search Component *************************//
+        public static void searchBook(String id,List<Book>books){
+            Iterator<Book> iterator = books.iterator();
+            while (iterator.hasNext()){
+                Book book = iterator.next();
+                if (book.getBookcode().equals(id)){
+                    System.out.println("==========================");
+                    System.out.println("Book Name   : " +book.bookname);
+                    System.out.println("Book Type   : " +book.bookcategory);
+                    System.out.println("Book Code   : " +book.bookcode);
+//                    System.out.println("Book Status : Exist");
+                    System.out.println("==========================");
+                }
+                else
+                    if (book.getBookcode().equalsIgnoreCase(id)){
+                        System.out.println("'Sorry your book is not exist to my Grouplease Library");
+                }
             }
-            else
-                System.out.println("Sorry your book code is not exist");
         }
-    }
+        //************************* Remove Component *************************//
+        public static void deletebook(String id,List<Book> books){
+            Iterator<Book> iterator = books.iterator();
+            while (iterator.hasNext()){
+                Book book = iterator.next();
+                if (book.getBookcode().equals(id)){
+                    iterator.remove();
+                    System.out.println("Book code : [" +book.bookcode+ "] has been delete.");
+                }
+                else
+                    if (book.getBookcode().equalsIgnoreCase(id)){
+                        System.out.println("Sorry your book code is not exist");
+                    }
+
+            }
+        }
 }
 
 
