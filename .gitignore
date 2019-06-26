@@ -1,4 +1,7 @@
-
 *.xml
 /.idea/
+<<<<<<< HEAD
 .idea/workspace.xml
+=======
+.idea/workspace.xml
+>>>>>>> 168985243cef0b832ed3241ae3dd71b1939f3fa6
