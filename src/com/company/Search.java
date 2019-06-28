@@ -15,6 +15,7 @@ public class Search {
                 System.out.println("Book Type   : " +book.getBookcategory());
                 System.out.println("Book Code   : " +book.getBookcode());
                 System.out.println("Book Bookstatus :"+book.getBookstatus());
+                System.out.println("Date : "+book.getBollow());
                 System.out.println("==========================");
             }
             else

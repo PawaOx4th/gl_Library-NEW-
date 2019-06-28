@@ -8,23 +8,27 @@ public class Add {
 
         System.out.println("=====================");
         Book book_add = new Book();
+
         Scanner sb1 = new Scanner(System.in);
         System.out.print("Please enter book name : ");
         String bName = sb1.nextLine();
         System.out.println("Book name : " + bName);
+
         Scanner sb2 = new Scanner(System.in);
-        Scanner sb3 = new Scanner(System.in);
         System.out.print("Please enter book code : ");
         String bCode = sb1.nextLine();
         System.out.println("Book name : " + bCode);
+
         Scanner sb4 = new Scanner(System.in);
         System.out.print("Please enter book category : ");
         String bCat = sb1.nextLine();
         Bookcategory category = Bookcategory.valueOf(bCat);
         System.out.println("Book name : " + bCat);
 
+
+
         book_add.setBookname(bName);
-         book_add.setBookcode(bCode);
+        book_add.setBookcode(bCode);
         book_add.setBookcategory(Bookcategory.valueOf(bCat));
         book_add.setBookstatus(Bookstatus.BLANK);
 

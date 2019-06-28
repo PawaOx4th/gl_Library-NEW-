@@ -1,22 +1,65 @@
 package com.company;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 class Book {
     //====================== Variable Section ========================//
     private String bookname,bookcode ;
-
     private Bookcategory bookcategory ;
     private Bookstatus bookstatus;
-    private LocalDate rent,back;
+    private LocalDate bollow,back ;
+    //==============================================================//
+
     //=======================Constructor============================//
+
+    public Book() {
+    }
+
+    public Book(String bookname){
+        this.bookname = bookname;
+    }
+
+    public Book(String bookname,String bookcode,Bookcategory bookcategory){
+        this.bookname = bookname;
+        this.bookcode = bookcode;
+        this.bookcategory = bookcategory;
+    }
+
+    public Book(String bookname,Bookcategory bookcategory,String bookcode){
+        this.bookname = bookname;
+        this.bookcategory = bookcategory;
+        this.bookcode = bookcode;
+    }
+    public Book(String bookname, Bookcategory bookcategory, String bookcode, String bookstatus) {
+        this.bookname = bookname;
+        this.bookcategory = bookcategory;
+        this.bookcode = bookcode;
+//        this.bookstatus = bookstatus;
+    }
     public Book(String bookname, String bookcode, Bookcategory bookcategory, Bookstatus bookstatus) {
         this.bookname = bookname;
         this.bookcode = bookcode;
         this.bookcategory = bookcategory;
         this.bookstatus = bookstatus;
     }
+
+    public Book(String bookname, String bookcode, Bookcategory bookcategory, Bookstatus bookstatus, LocalDate bollow) {
+        this.bookname = bookname;
+        this.bookcode = bookcode;
+        this.bookcategory = bookcategory;
+        this.bookstatus = bookstatus;
+        this.bollow = bollow;
+    }
+
+    public Book(String bookname, String bookcode, Bookcategory bookcategory, Bookstatus bookstatus, LocalDate bollow, LocalDate back) {
+        this.bookname = bookname;
+        this.bookcode = bookcode;
+        this.bookcategory = bookcategory;
+        this.bookstatus = bookstatus;
+        this.bollow = bollow;
+        this.back = back;
+    }
+
     //=======================SetBookStatus============================//
     public void setBookstatus(Bookstatus bookstatus) {
         this.bookstatus = bookstatus;
@@ -34,57 +77,41 @@ class Book {
         this.bookcategory = bookcategory;
     }
 
-    public void setRent(LocalDate rent) {
-        this.rent = rent;
+    public void setBollow(LocalDate bollow) {
+        this.bollow = bollow;
     }
 
     public void setBack(LocalDate back) {
         this.back = back;
     }
 
-
-
     //====================== Getter Section ========================//
+
     public String getBookname() {
         return bookname;
-    }
-
-    public Bookcategory getBookcategory() {
-        return bookcategory;
     }
 
     public String getBookcode() {
         return bookcode;
     }
 
-    public Book(){
+    public Bookcategory getBookcategory() {
+        return bookcategory;
     }
 
     public Bookstatus getBookstatus() {
         return bookstatus;
     }
 
-    //====================== Constructor Section ========================//
-    public Book(String bookname){
-        this.bookname = bookname;
+    public LocalDate getBollow() {
+        return bollow;
     }
 
-    public Book(String bookname,Bookcategory bookcategory){
-        this.bookname = bookname;
-        this.bookcategory = bookcategory;
+    public LocalDate getBack() {
+        return back;
     }
 
-    public Book(String bookname,Bookcategory bookcategory,String bookcode){
-        this.bookname = bookname;
-        this.bookcategory = bookcategory;
-        this.bookcode = bookcode;
-    }
-    public Book(String bookname, Bookcategory bookcategory, String bookcode, String bookstatus) {
-        this.bookname = bookname;
-        this.bookcategory = bookcategory;
-        this.bookcode = bookcode;
-//        this.bookstatus = bookstatus;
-    }
+
 
     //====================== To String Section ========================//
     @Override
@@ -93,7 +120,8 @@ class Book {
                 "Book Name = " + bookname +
                 " | Book Category = " + bookcategory +
                 " | Book Code = " + bookcode +
-                " | Book Status = "+bookstatus +'}';
+                " | Book Status = "+bookstatus +
+                " | Date = " +bollow +'}';
     }
     //====================== Equal Section ========================//
     @Override
