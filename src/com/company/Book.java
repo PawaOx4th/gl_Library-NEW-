@@ -1,12 +1,47 @@
 package com.company;
-
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
 class Book {
     //====================== Variable Section ========================//
-    public String bookname,bookcategory,bookcode,bookstatus;
-    public Date rent,back;
+    private String bookname,bookcode ;
+
+    private Bookcategory bookcategory ;
+    private Bookstatus bookstatus;
+    private LocalDate rent,back;
+    //=======================Constructor============================//
+    public Book(String bookname, String bookcode, Bookcategory bookcategory, Bookstatus bookstatus) {
+        this.bookname = bookname;
+        this.bookcode = bookcode;
+        this.bookcategory = bookcategory;
+        this.bookstatus = bookstatus;
+    }
+    //=======================SetBookStatus============================//
+    public void setBookstatus(Bookstatus bookstatus) {
+        this.bookstatus = bookstatus;
+    }
+
+    public void setBookname(String bookname) {
+        this.bookname = bookname;
+    }
+
+    public void setBookcode(String bookcode) {
+        this.bookcode = bookcode;
+    }
+
+    public void setBookcategory(Bookcategory bookcategory) {
+        this.bookcategory = bookcategory;
+    }
+
+    public void setRent(LocalDate rent) {
+        this.rent = rent;
+    }
+
+    public void setBack(LocalDate back) {
+        this.back = back;
+    }
+
 
 
     //====================== Getter Section ========================//
@@ -14,7 +49,7 @@ class Book {
         return bookname;
     }
 
-    public String getBookcategory() {
+    public Bookcategory getBookcategory() {
         return bookcategory;
     }
 
@@ -23,28 +58,32 @@ class Book {
     }
 
     public Book(){
-
     }
+
+    public Bookstatus getBookstatus() {
+        return bookstatus;
+    }
+
     //====================== Constructor Section ========================//
     public Book(String bookname){
         this.bookname = bookname;
     }
 
-    public Book(String bookname,String bookcategory){
+    public Book(String bookname,Bookcategory bookcategory){
         this.bookname = bookname;
         this.bookcategory = bookcategory;
     }
 
-    public Book(String bookname,String bookcategory,String bookcode){
+    public Book(String bookname,Bookcategory bookcategory,String bookcode){
         this.bookname = bookname;
         this.bookcategory = bookcategory;
         this.bookcode = bookcode;
     }
-    public Book(String bookname, String bookcategory, String bookcode, String bookstatus) {
+    public Book(String bookname, Bookcategory bookcategory, String bookcode, String bookstatus) {
         this.bookname = bookname;
         this.bookcategory = bookcategory;
         this.bookcode = bookcode;
-        this.bookstatus = bookstatus;
+//        this.bookstatus = bookstatus;
     }
 
     //====================== To String Section ========================//
@@ -53,7 +92,8 @@ class Book {
         return "Book {" +
                 "Book Name = " + bookname +
                 " | Book Category = " + bookcategory +
-                " | Book Code = " + bookcode + '}';
+                " | Book Code = " + bookcode +
+                " | Book Status = "+bookstatus +'}';
     }
     //====================== Equal Section ========================//
     @Override

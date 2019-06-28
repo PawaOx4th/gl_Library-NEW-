@@ -8,90 +8,130 @@ import java.util.*;
 
 public class Main {
 
-    private static Object Book;
+    public static Object Book;
 
     public static void main(String[] args) {
-	//************************* Login Section *************************//
+
+
+        //************************* Login Section *************************//
         Scanner pos = new Scanner(System.in);
         System.out.println("Please enter your position");
         System.out.println("1 - Administrator");
         System.out.println("2 - Employee");
         int ans_1 = pos.nextInt();
-        if (ans_1 == 1){
-            //************************* Administrator Section *************************//
+        Bookshelf books = new Bookshelf();
+        Bookex bex = new Bookex();
+        bex.setbooxEx(books.getBooks());
+
+        //************************* Administrator Section *************************//
+
+        if (ans_1 == 1) {
             boolean loop = true;
-            Scanner  want = new Scanner(System.in);
-            //************************* Add Component *************************//
-            List<Book> books = new ArrayList<>();
+            Scanner want = new Scanner(System.in);
+//            List<Book> books = new ArrayList<>();
+
+            /************************* Add Component *************************/
             do {
                 System.out.println("\nWhat  do you want to do");
                 System.out.println("1 - Add Book\t2 - Delete Book\t3 - Search\n" +
-                        "4 - Check\t\t5 - Sort\t\t6 - Approve\n7 - Accept\t\t8 - Exit");
+                        "4 - ChangStatus\t\t5 - Sort\t\t6 - Approve\n7 - Accept\t\t8 - Exit");
                 int ans_2 = want.nextInt();
                 switch (ans_2) {
                     //************************* Add Section *************************//
                     case 1:
-                            Book book_add = new Book();
-                            Scanner sb1 = new Scanner(System.in);
-                            System.out.print("Please enter book name : ");
-                            String bName = sb1.nextLine();
-                            System.out.println("Book name : " + bName);
-                            Scanner sb2 = new Scanner(System.in);
-                            System.out.print("Please enter book category : ");
-                            String bCat = sb1.nextLine();
-                            System.out.println("Book name : " + bCat);
-                            Scanner sb3 = new Scanner(System.in);
-                            System.out.print("Please enter book code : ");
-                            String bCode = sb1.nextLine();
-                            System.out.println("Book name : " + bCode);
-
-                            book_add.bookname = bName;
-                            book_add.bookcategory = bCat;
-                            book_add.bookcode = bCode;
-                            book_add.bookstatus = "Exist";
-
-                            books.add(book_add);
-                            System.out.println("=====================");
-                            for (int i = 0; i < books.size(); i++) {
-                                System.out.println(books.get(i));
-                            }
-                            System.out.println("=====================");
+                        Add a = new Add();
+                        a.Addbook(books.getBooks());
                         break;
                     case 2:
                         //************************* Remove Section *************************//
+                        Remove d = new Remove();
                         Scanner dc = new Scanner(System.in);
                         System.out.println("\nPlease insert Book code to delete : ");
                         String id = dc.nextLine();
-                        deletebook(id,books);
-
-                        System.out.println("=====================");
-                        System.out.println("this is book in list : ");
-                        for (int i = 0; i < books.size(); i++) {
-                            System.out.println(books.get(i));
-                        }
-                        System.out.println("=====================");
-//                        Scanner dc = new Scanner(System.in);
-//                        System.out.println("\nPlease insert Book code to delete : ");
-//                        int re = dc.nextInt();
-//                        for (Book book_del : books) {
-//                            if (book_del.bookcode.equals(re)) {
-//                                books.remove(book_del);
-//                            }
-//                        }
-//                        for (int j=0 ; j < books.size() ; j++){
-//                            System.out.println(books.get(j));
-//                        }
+                        d.removebook(id, books.getBooks());
+                        d.show(books.getBooks());
                         break;
                     case 3:
                         //************************* Search Section *************************//
+                        System.out.println("Please Select Search :");
+                        System.out.println("1 - Search by name\t2 - Search by Code\t" +
+                                "3 - Search by Cattegory \t4 - Search by Status   ");
                         Scanner sh = new Scanner(System.in);
-                        System.out.println("Please enter book code : ");
-                        String id2 = sh.nextLine();
-                        searchBook(id2,books);
+                        int Searchf = sh.nextInt();
+                        switch (Searchf){
+                            case 1 :
+                                Scanner n = new Scanner(System.in);
+                                System.out.println("Please enter book name : ");
+                                String nameS = n.nextLine();
+                                Search Sname = new Search();
+                                Sname.searchBookname(nameS, books.getBooks());
+                                break;
+                            case 2 :
+                                Scanner n2 = new Scanner(System.in);
+                                System.out.println("Please enter book code : ");
+                                String codeS = n2.nextLine();
+                                Search Scode = new Search();
+                                Scode.searchBookid(codeS, books.getBooks());
+                                break;
+                            case 3 :
+                                Scanner n3 = new Scanner(System.in);
+                                System.out.println("Please enter book Cattegory : ");
+                                String N3 = n3.nextLine();
+                                Bookcategory cattegoryS = Bookcategory.valueOf(N3);
+                                Search Scat = new Search();
+                                Scat.searchBookcatagory(cattegoryS, books.getBooks());
+                                break;
+                            case 4:
+                                Scanner n4 = new Scanner(System.in);
+                                System.out.println("Please enter book Status : ");
+                                String N4 = n4.nextLine();
+                                Bookstatus bookstatus = Bookstatus.valueOf(N4);
+                                Search Sstatus = new Search();
+                                Sstatus.searchBookstatus(bookstatus, books.getBooks());
+                                break;
+                        }
+
                         break;
                     case 4:
+                        //************************* Status Section *************************//
+                        Scanner ch = new Scanner(System.in);
+                        System.out.println("Please input Book code to Chang Status");
+                        String id3 = ch.nextLine();
+                        ChangStatus Chang = new ChangStatus();
+                        Chang.changStatus(id3,books.getBooks());
                         break;
                     case 5:
+                        Scanner sort = new Scanner(System.in);
+                        System.out.println("Please input choice for Sort book ");
+                        System.out.println("1 - Sort by name\t2 - Sort by Code\t" +
+                                "3 - Sort by Cattegory \t4 - Sort by Status   ");
+                        int  SortFx = sort.nextInt();
+                        switch (SortFx){
+                            case 1 :
+                                Collections.sort(books.getBooks(), Sort.comparatorname);  //coloections.sort('List Book),'Class'.'Comparator object'
+                                for (Book book : books.getBooks()){
+                                    System.out.println(book);
+                                }
+                                break;
+                            case 2 :
+                                Collections.sort(books.getBooks(), Sort.comparatorcode);  //coloections.sort('List Book),'Class'.'Comparator object'
+                                for (Book book : books.getBooks()){
+                                    System.out.println(book);
+                                }
+                                break;
+                            case 3 :
+                                Collections.sort(books.getBooks(), Sort.comparatorCattegory);  //coloections.sort('List Book),'Class'.'Comparator object'
+                                for (Book book : books.getBooks()){
+                                    System.out.println(book);
+                                }
+                                break;
+                            case 4 :
+                                Collections.sort(books.getBooks(), Sort.comparatorstatus);  //coloections.sort('List Book),'Class'.'Comparator object'
+                                for (Book book : books.getBooks()){
+                                    System.out.println(book);
+                                }
+                                break;
+                        }
                         break;
                     case 6:
                         break;
@@ -103,74 +143,39 @@ public class Main {
                         loop = false;
                 }
             }
-        while (loop);
-        }
-        else{
-            if (ans_1 == 2){
+            while (loop);
+        } else {
+            if (ans_1 == 2) {
                 //************************* Employee Section *************************//
+                // List<Book> books = new ArrayList<>();
                 boolean loop = true;
-                Scanner  want = new Scanner(System.in);
+                Scanner want = new Scanner(System.in);
                 //************************* Add Component *************************//
-                List<Book> books = new ArrayList<>();
+
                 do {
                     System.out.println("\nWhat  do you want to do");
                     System.out.println("1 - Search\n2 - Check\n3 - Rental\n4 - Return\n5-Exit");
                     int ans_2 = want.nextInt();
                     switch (ans_2) {
-                        case 1 :
+                        case 1:
                             break;
-                        case 2 :
+                        case 2:
                             break;
-                        case 3 :
+                        case 3:
                             break;
-                        case 4 :
+                        case 4:
                             break;
 
-                        default: loop = false;
+                        default:
+                            loop = false;
                     }
-                }while (loop);
-            }
-            else {
+                } while (loop);
+            } else {
                 System.out.println("Sorry please connect again later");
             }
         }
     }
-
-        //************************* Search Component *************************//
-        public static void searchBook(String id,List<Book>books){
-            Iterator<Book> iterator = books.iterator();
-            while (iterator.hasNext()){
-                Book book = iterator.next();
-                if (book.getBookcode().equals(id)){
-                    System.out.println("==========================");
-                    System.out.println("Book Name   : " +book.bookname);
-                    System.out.println("Book Type   : " +book.bookcategory);
-                    System.out.println("Book Code   : " +book.bookcode);
-//                    System.out.println("Book Status : Exist");
-                    System.out.println("==========================");
-                }
-                else
-                    if (book.getBookcode().equalsIgnoreCase(id)){
-                        System.out.println("'Sorry your book is not exist to my Grouplease Library");
-                }
-            }
-        }
-        //************************* Remove Component *************************//
-        public static void deletebook(String id,List<Book> books){
-            Iterator<Book> iterator = books.iterator();
-            while (iterator.hasNext()){
-                Book book = iterator.next();
-                if (book.getBookcode().equals(id)){
-                    iterator.remove();
-                    System.out.println("Book code : [" +book.bookcode+ "] has been delete.");
-                }
-                else
-                    if (book.getBookcode().equalsIgnoreCase(id)){
-                        System.out.println("Sorry your book code is not exist");
-                    }
-
-            }
-        }
 }
+
 
 
