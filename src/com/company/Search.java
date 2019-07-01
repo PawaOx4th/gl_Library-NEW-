@@ -34,6 +34,7 @@ public class Search {
                 System.out.println("Book Type   : " +book.getBookcategory());
                 System.out.println("Book Code   : " +book.getBookcode());
                 System.out.println("Book Bookstatus :"+book.getBookstatus());
+                System.out.println("Book Date : "+ book.getBollow());
 
 //                    System.out.println("Book Status : Exist");
                 System.out.println("==========================");
@@ -44,20 +45,21 @@ public class Search {
             }
         }
     }
-    public static void searchBookcatagory(Bookcategory id, List<Book> books){
+    public static void searchBookcatagory(Bookcategory cate, List<Book> books){
         Iterator<Book> iterator = books.iterator();
         while (iterator.hasNext()){
             Book book = iterator.next();
-            if (book.getBookcategory().equals(id)){
+            if (book.getBookcategory().equals(cate)){
                 System.out.println("==========================");
                 System.out.println("Book Name   : " +book.getBookname());
                 System.out.println("Book Type   : " +book.getBookcategory());
                 System.out.println("Book Code   : " +book.getBookcode());
                 System.out.println("Book Bookstatus :"+book.getBookstatus());
+                System.out.println("Book Date : "+ book.getBollow());
                 System.out.println("==========================");
             }
             else
-            if (book.getBookcategory().equals(id)){
+            if (book.getBookcategory().equals(cate)){
                 System.out.println("'Sorry your book is not exist to my Grouplease Library");
             }
         }
@@ -72,6 +74,7 @@ public class Search {
                 System.out.println("Book Type   : " +book.getBookcategory());
                 System.out.println("Book Code   : " +book.getBookcode());
                 System.out.println("Book Bookstatus :"+book.getBookstatus());
+                System.out.println("Book Date : "+ book.getBollow());
                 System.out.println("==========================");
             }
             else

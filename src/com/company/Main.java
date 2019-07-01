@@ -45,9 +45,9 @@ public class Main {
                 switch (ans_2) {
                     //************************* Add Section *************************//
                     case 1:
-//                        Add a = new Add();
-//                        a.Addbook(books.getBooks());
-//                        break;
+                        Add a = new Add();
+                        a.Addbook(books.getBooks());
+                        break;
                     case 2:
                         //************************* Remove Section *************************//
                         Remove d = new Remove();

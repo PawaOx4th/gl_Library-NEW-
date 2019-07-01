@@ -78,7 +78,8 @@ class Book {
     }
 
     public void setBollow(LocalDate bollow) {
-        this.bollow = bollow;
+
+        this.bollow = LocalDate.now();
     }
 
     public void setBack(LocalDate back) {
@@ -104,6 +105,7 @@ class Book {
     }
 
     public LocalDate getBollow() {
+//        LocalDate bollow = LocalDate.now() ;
         return bollow;
     }
 
@@ -121,7 +123,7 @@ class Book {
                 " | Book Category = " + bookcategory +
                 " | Book Code = " + bookcode +
                 " | Book Status = "+bookstatus +
-                " | Date = " +bollow +'}';
+                " | Date = " + LocalDate.now() +'}';
     }
     //====================== Equal Section ========================//
     @Override
