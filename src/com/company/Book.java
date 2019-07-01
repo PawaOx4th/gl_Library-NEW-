@@ -7,7 +7,7 @@ class Book {
     private String bookname,bookcode ;
     private Bookcategory bookcategory ;
     private Bookstatus bookstatus;
-    private LocalDate bollow,back ;
+    private LocalDate bollow,returns ;
     //==============================================================//
 
     //=======================Constructor============================//
@@ -15,27 +15,6 @@ class Book {
     public Book() {
     }
 
-    public Book(String bookname){
-        this.bookname = bookname;
-    }
-
-    public Book(String bookname,String bookcode,Bookcategory bookcategory){
-        this.bookname = bookname;
-        this.bookcode = bookcode;
-        this.bookcategory = bookcategory;
-    }
-
-    public Book(String bookname,Bookcategory bookcategory,String bookcode){
-        this.bookname = bookname;
-        this.bookcategory = bookcategory;
-        this.bookcode = bookcode;
-    }
-    public Book(String bookname, Bookcategory bookcategory, String bookcode, String bookstatus) {
-        this.bookname = bookname;
-        this.bookcategory = bookcategory;
-        this.bookcode = bookcode;
-//        this.bookstatus = bookstatus;
-    }
     public Book(String bookname, String bookcode, Bookcategory bookcategory, Bookstatus bookstatus) {
         this.bookname = bookname;
         this.bookcode = bookcode;
@@ -49,15 +28,6 @@ class Book {
         this.bookcategory = bookcategory;
         this.bookstatus = bookstatus;
         this.bollow = bollow;
-    }
-
-    public Book(String bookname, String bookcode, Bookcategory bookcategory, Bookstatus bookstatus, LocalDate bollow, LocalDate back) {
-        this.bookname = bookname;
-        this.bookcode = bookcode;
-        this.bookcategory = bookcategory;
-        this.bookstatus = bookstatus;
-        this.bollow = bollow;
-        this.back = back;
     }
 
     //=======================SetBookStatus============================//
@@ -78,15 +48,14 @@ class Book {
     }
 
     public void setBollow(LocalDate bollow) {
-
         this.bollow = LocalDate.now();
     }
 
-    public void setBack(LocalDate back) {
-        this.back = back;
+    public void setReturns(LocalDate returns) {
+        this.returns = returns;
     }
 
-    //====================== Getter Section ========================//
+//====================== Getter Section ========================//
 
     public String getBookname() {
         return bookname;
@@ -109,22 +78,23 @@ class Book {
         return bollow;
     }
 
-    public LocalDate getBack() {
-        return back;
+    public LocalDate getReturns() {
+        return returns;
     }
-
-
 
     //====================== To String Section ========================//
     @Override
     public String toString() {
-        return "Book {" +
-                "Book Name = " + bookname +
-                " | Book Category = " + bookcategory +
-                " | Book Code = " + bookcode +
-                " | Book Status = "+bookstatus +
-                " | Date = " + LocalDate.now() +'}';
+        return "Book{" +
+                "bookname='" + bookname + '\'' +
+                ", bookcode='" + bookcode + '\'' +
+                ", bookcategory=" + bookcategory +
+                ", bookstatus=" + bookstatus +
+                ", bollow=" + bollow +
+                ", returns=" + returns +
+                '}';
     }
+
     //====================== Equal Section ========================//
     @Override
     public boolean equals(Object o) {

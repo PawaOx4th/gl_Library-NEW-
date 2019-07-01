@@ -2,6 +2,7 @@ package Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 public class delayTime {
 
@@ -19,8 +20,8 @@ public class delayTime {
             //Create LocalDateTime from LocalDate
             System.out.println("Current Time="+today.atTime(LocalTime.now()));
 
-            //plus and minus operations
-            System.out.println("7 days after today will be "+today.plusDays(7));
+
+            System.out.println("7 days after today will be "+today.plusDays(7));//plus and minus operations
 //            System.out.println("3 weeks after today will be "+today.plusWeeks(3));
 //            System.out.println("20 months after today will be "+today.plusMonths(20));
 //
@@ -36,6 +37,14 @@ public class delayTime {
 //            Period period = today.until(lastDayOfYear);
 //            System.out.println("Period Format= "+period);
 //            System.out.println("Months remaining in the year= "+period.getMonths());
+
+//
+                var LocalDate = java.time.LocalDate.now();
+    //        DateTimeFormatter dateFormatter4 = DateTimeFormatter.ofPattern("dd-LL-yyyy");
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-LL-yyyy");
+                System.out.println(LocalDate.format(dateTimeFormatter));
+
+
         }
     }
 

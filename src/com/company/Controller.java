@@ -95,6 +95,9 @@ public class Controller {
                         }
                         break;
                     case 6:
+                        Admin_Function permits = new Admin_Function();
+                        permits.permits(books.getBooks());
+
                         break;
                     case 7:
                         break;
