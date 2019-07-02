@@ -8,8 +8,20 @@ import java.util.Scanner;
 
 public class Admin_Function {
 
+    public static  void printOut(Book book){
+
+        System.out.println("==========================");
+        System.out.println("Book Name   : " + book.getBookname());
+        System.out.println("Book Type   : " + book.getBookcategory());
+        System.out.println("Book Code   : " + book.getBookcode());
+        System.out.println("Book Bookstatus :" + book.getBookstatus());
+        System.out.println("Book Date Bollow : " + book.getBollow());
+        System.out.println("Book Date Return : " + book.getReturns());
+        System.out.println("==========================");
+    }
+
     //========================== ADD BOOK ==========================//
-    public static void Addbook(List<Book> books) {
+    public static void Addbook(Bookshelf books) {
         System.out.println("=====================");
         Book book_add = new Book();
         Scanner sb1 = new Scanner(System.in);
@@ -31,8 +43,10 @@ public class Admin_Function {
         book_add.setBookcategory(Bookcategory.valueOf(bCat));
         book_add.setBookstatus(Bookstatus.BLANK);
 
-        for (int i = 0; i < books.size(); i++) {
-            System.out.println(books.get(i));
+        books.getBooks().add(book_add);
+
+        for (int i = 0; i < books.getBooks().size(); i++) {
+            System.out.println(books.getBooks().get(i));
         }
         System.out.println("=====================");
     }
@@ -66,90 +80,70 @@ public class Admin_Function {
     }
 
     //************************* Search Book *************************//
-    public static void searchBookname(List<Book> books) {
-
+    public static void searchBookname(Bookshelf books) {
         Scanner n = new Scanner(System.in);
         System.out.println("Please enter book name : ");
         String nameS = n.nextLine();
-        Iterator<Book> iterator = books.iterator();
-        while (iterator.hasNext()) {
-            Book book = iterator.next();
-            if (book.getBookname().equals(nameS)) {
-                System.out.println("==========================");
-                System.out.println("Book Name   : " + book.getBookname());
-                System.out.println("Book Type   : " + book.getBookcategory());
-                System.out.println("Book Code   : " + book.getBookcode());
-                System.out.println("Book Bookstatus :" + book.getBookstatus());
-                System.out.println("Date : " + book.getBollow());
-                System.out.println("==========================");
-            } else if (book.getBookname().equalsIgnoreCase(nameS)) {
-                System.out.println("'Sorry your book is not exist to my Grouplease Library");
+        boolean isState = false;
+        for (Book book : books.getBooks()) {
+            if (book.getBookname().equalsIgnoreCase(nameS)) {
+                isState = true;
+                if (book.getBookname().equalsIgnoreCase(nameS)) {
+                    printOut(book);
+                } else {
+                    System.out.println("'Sorry your book is not exist to my Grouplease Library");
+                }
             }
         }
+        if(!isState){System.out.println("Please Again Enter Book Code");}
     }
 
-    public static void searchBookid(List<Book> books) {
+    public static void searchBookid(Bookshelf books) {
         Scanner n2 = new Scanner(System.in);
         System.out.println("Please enter book code : ");
         String codeS = n2.nextLine();
-        Iterator<Book> iterator = books.iterator();
-        while (iterator.hasNext()) {
-            Book book = iterator.next();
-            if (book.getBookcode().equals(codeS)) {
-                System.out.println("==========================");
-                System.out.println("Book Name   : " + book.getBookname());
-                System.out.println("Book Type   : " + book.getBookcategory());
-                System.out.println("Book Code   : " + book.getBookcode());
-                System.out.println("Book Bookstatus :" + book.getBookstatus());
-                System.out.println("Book Date : " + book.getBollow());
-
-//                    System.out.println("Book Status : Exist");
-                System.out.println("==========================");
-            } else if (book.getBookcode().equalsIgnoreCase(codeS)) {
-                System.out.println("'Sorry your book is not exist to my Grouplease Library");
+        boolean isState = false;
+        for (Book book : books.getBooks()) {
+            if (book.getBookcode().equalsIgnoreCase(codeS)) {
+                isState = true;
+                if (book.getBookname().equalsIgnoreCase(codeS)) {
+                    printOut(book);
+                } else {
+                    System.out.println("'Sorry your book is not exist to my Grouplease Library");
+                }
+            } else {
             }
+        }
+        if (!isState) {
+            System.out.println("Please Again Enter Book Code");
         }
     }
 
-    public static void searchBookcatagory(List<Book> books) {
+    public static void searchBookcatagory(Bookshelf books) {
         Scanner n3 = new Scanner(System.in);
         System.out.println("Please enter book Cattegory : ");
         String N3 = n3.nextLine();
         Bookcategory cattegoryS = Bookcategory.valueOf(N3);
-        Iterator<Book> iterator = books.iterator();
-        while (iterator.hasNext()) {
-            Book book = iterator.next();
+        for (Book book : books.getBooks()) {
             if (book.getBookcategory().equals(cattegoryS)) {
-                System.out.println("==========================");
-                System.out.println("Book Name   : " + book.getBookname());
-                System.out.println("Book Type   : " + book.getBookcategory());
-                System.out.println("Book Code   : " + book.getBookcode());
-                System.out.println("Book Bookstatus :" + book.getBookstatus());
-                System.out.println("Book Date : " + book.getBollow());
-                System.out.println("==========================");
+
+                printOut(book);
+
+
             } else if (book.getBookcategory().equals(cattegoryS)) {
                 System.out.println("'Sorry your book is not exist to my Grouplease Library");
             }
         }
     }
 
-    public static void searchBookstatus(List<Book> books) {
+    public static void searchBookstatus(Bookshelf books) {
         Scanner n4 = new Scanner(System.in);
         System.out.println("Please enter book Status : ");
         String N4 = n4.nextLine();
         Bookstatus bookstatus = Bookstatus.valueOf(N4);
-        Iterator<Book> iterator = books.iterator();
-        while (iterator.hasNext()) {
-            Book book = iterator.next();
-            if (book.getBookstatus().equals(bookstatus)) {
-                System.out.println("==========================");
-                System.out.println("Book Name   : " + book.getBookname());
-                System.out.println("Book Type   : " + book.getBookcategory());
-                System.out.println("Book Code   : " + book.getBookcode());
-                System.out.println("Book Bookstatus :" + book.getBookstatus());
-                System.out.println("Book Date : " + book.getBollow());
-                System.out.println("==========================");
-            } else if (book.getBookstatus().equals(bookstatus)) {
+        for (Book book : books.getBooks()) {
+            if (book.getBookstatus().equals(bookstatus)) printOut(book);
+            else if (book.getBookstatus().equals(bookstatus)) {
                 System.out.println("'Sorry your book is not exist to my Grouplease Library");
             }
         }
@@ -192,16 +186,14 @@ public class Admin_Function {
             return BookN1.compareTo(BookN2);
         }
     };
-    //=========================================================================================//
+
 
     //=================================== CHANG STATE BOOK ============================================//
-    public static void changStatus(List<Book> books) {
+    public static void changStatus(Bookshelf books) {
         Scanner ch = new Scanner(System.in);
         System.out.println("Please input Book code to Chang Status");
         String id = ch.nextLine();
-        Iterator<Book> iterator = books.iterator();
-        while (iterator.hasNext()) {
-            Book book = iterator.next();
+        for (Book book : books.getBooks()) {
             if (book.getBookcode().equals(id)) {
                 Bookstatus chang = Bookstatus.valueOf("BUSY");
                 book.setBookstatus(chang);
@@ -210,24 +202,62 @@ public class Admin_Function {
         }
     }
 
+
+
     //=================================== Permits STATE BOOK ============================================//
     public static void permits(List<Book> books) {
         Scanner n = new Scanner(System.in);
-        System.out.println("Please enter book name : ");
+        System.out.println("========Bollow Book=========");
+        System.out.println("Please enter code name : ");
         String nameS = n.nextLine();
+        System.out.println("============================");
         Iterator<Book> iterator = books.iterator();
+        boolean isFound = false;
         while (iterator.hasNext()) {
+            Controller controller = new Controller();
             Book book = iterator.next();
-            if ((book.getBookname().equals(nameS)) && (book.getBookstatus().equals(Bookstatus.BLANK)) ) {
-                book.setBollow(LocalDate.now());
-                book.setBookstatus(Bookstatus.BUSY);
-                System.out.println(book);
-            }
-            else  {
-                System.out.println("AAAAA");
+            if (book.getBookcode().equalsIgnoreCase(nameS)) {
+                isFound = true;
+                if ((book.getBookstatus().equals(Bookstatus.BLANK))) {
+                    book.setBollow(LocalDate.now());
+                    book.setBookstatus(Bookstatus.BUSY);
+                    printOut(book);
+                } else {
+                    System.out.println("Book is not" + book.getBookstatus());
+                }
+            } else {
             }
         }
+        if (!isFound){
+            System.out.println("Please Again Enter Book Code");
+        }
+    }
 
 
+    //=================================== Return STATE BOOK ============================================//
+    public static void returnbook(List<Book>books){
+        Scanner n = new Scanner(System.in);
+        System.out.println("========Return Book=========");
+        System.out.println("Please enter code name : ");
+        String nameS = n.nextLine();
+        System.out.println("============================");
+        Iterator<Book> iterator = books.iterator();
+        boolean returnb = false;
+        while (iterator.hasNext()) {
+            Controller controller = new Controller();
+            Book book = iterator.next();
+            if (book.getBookcode().equalsIgnoreCase(nameS)) {
+                returnb = true;
+                if ((book.getBookstatus().equals(Bookstatus.BUSY))) {
+                    book.setReturns(LocalDate.now());
+                    book.setBookstatus(Bookstatus.BLANK);
+                    printOut(book);
+                } else {
+                    System.out.println("Book is not" + book.getBookstatus());
+                }
+            } else {}
+        }
+        if (!returnb){ System.out.println("Please Again Enter Book Code");}
     }
 }
+

@@ -11,19 +11,22 @@ public class Main {
     public static void main(String[] args) {
 
         //************************* Variable *************************//
+        System.out.println("===========================");
+        System.out.println("||                       ||");
+        System.out.println("||   WelCome to Liberry  ||");
+        System.out.println("||                       ||");
+        System.out.println("===========================");
         Controller controller = new Controller() ;
         LocalDate date = LocalDate.now();
         Bookshelf books = new Bookshelf();
         Bookex bex = new Bookex();
         bex.setbooxEx(books.getBooks());
+        controller.controller(books);
 
         //************************* Login Section *************************//
-        Scanner pos = new Scanner(System.in);
-        System.out.println("Please enter your position");
-        System.out.println("1 - Administrator");
-        System.out.println("2 - Employee");
-        int ans_1 = pos.nextInt();
-        controller.controller(ans_1,books);
+
+
+
 
         //************************* Administrator Section *************************//
     }
