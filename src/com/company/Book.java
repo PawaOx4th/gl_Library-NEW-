@@ -4,10 +4,10 @@ import java.util.Objects;
 
 class Book {
     //====================== Variable Section ========================//
-    private String bookname,bookcode ;
-    private Bookcategory bookcategory ;
-    private Bookstatus bookstatus;
-    private LocalDate bollow,returns ;
+    protected String bookname,bookcode ;
+    protected Enum.Bookcategory bookcategory ;
+    protected Enum.Bookstatus bookstatus;
+    protected LocalDate bollow,returns ;
     //==============================================================//
 
     //=======================Constructor============================//
@@ -15,14 +15,14 @@ class Book {
     public Book() {
     }
 
-    public Book(String bookname, String bookcode, Bookcategory bookcategory, Bookstatus bookstatus) {
+    public Book(String bookname, String bookcode, Enum.Bookcategory bookcategory, Enum.Bookstatus bookstatus) {
         this.bookname = bookname;
         this.bookcode = bookcode;
         this.bookcategory = bookcategory;
         this.bookstatus = bookstatus;
     }
 
-    public Book(String bookname, String bookcode, Bookcategory bookcategory, Bookstatus bookstatus, LocalDate bollow) {
+    public Book(String bookname, String bookcode, Enum.Bookcategory bookcategory, Enum.Bookstatus bookstatus, LocalDate bollow) {
         this.bookname = bookname;
         this.bookcode = bookcode;
         this.bookcategory = bookcategory;
@@ -31,7 +31,7 @@ class Book {
     }
 
     //=======================SetBookStatus============================//
-    public void setBookstatus(Bookstatus bookstatus) {
+    public void setBookstatus(Enum.Bookstatus bookstatus) {
         this.bookstatus = bookstatus;
     }
 
@@ -43,7 +43,7 @@ class Book {
         this.bookcode = bookcode;
     }
 
-    public void setBookcategory(Bookcategory bookcategory) {
+    public void setBookcategory(Enum.Bookcategory bookcategory) {
         this.bookcategory = bookcategory;
     }
 
@@ -65,11 +65,11 @@ class Book {
         return bookcode;
     }
 
-    public Bookcategory getBookcategory() {
+    public Enum.Bookcategory getBookcategory() {
         return bookcategory;
     }
 
-    public Bookstatus getBookstatus() {
+    public Enum.Bookstatus getBookstatus() {
         return bookstatus;
     }
 
