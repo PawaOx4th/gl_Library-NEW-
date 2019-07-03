@@ -3,7 +3,6 @@ package com.company;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 public class Admin_Function {
@@ -19,7 +18,6 @@ public class Admin_Function {
         System.out.println("Book Date Return : " + book.getReturns());
         System.out.println("==========================");
     }
-
     //========================== ADD BOOK ==========================//
     public static void Addbook(Bookshelf books) {
         System.out.println("=====================");
@@ -35,13 +33,13 @@ public class Admin_Function {
         Scanner sb4 = new Scanner(System.in);
         System.out.print("Please enter book category : ");
         String bCat = sb1.nextLine();
-        Bookcategory category = Bookcategory.valueOf(bCat);
+        Enum.Bookcategory category = Enum.Bookcategory.valueOf(bCat);
         System.out.println("Book name : " + bCat);
 
         book_add.setBookname(bName);
         book_add.setBookcode(bCode);
-        book_add.setBookcategory(Bookcategory.valueOf(bCat));
-        book_add.setBookstatus(Bookstatus.BLANK);
+        book_add.setBookcategory(Enum.Bookcategory.valueOf(bCat));
+        book_add.setBookstatus(Enum.Bookstatus.BLANK);
 
         books.getBooks().add(book_add);
 
@@ -52,12 +50,12 @@ public class Admin_Function {
     }
 
     //========================== Remove BOOK ==========================//
-    public static void removebook(List<Book> books) {
+    public static void removebook(Bookshelf books) {
 
         Scanner dc = new Scanner(System.in);
         System.out.println("\nPlease insert Book code to delete : ");
         String id = dc.nextLine();
-        Iterator<Book> iterator = books.iterator();
+        Iterator<Book> iterator = books.getBooks().iterator();
         while (iterator.hasNext()) {
             Book book = iterator.next();
             if (book.getBookcode().equals(id)) {
@@ -70,11 +68,11 @@ public class Admin_Function {
         }
     }
 
-    public static void show(List<Book> books) {
+    public static void show(Bookshelf books) {
         System.out.println("=====================");
         System.out.println("this is book in list : ");
-        for (int i = 0; i < books.size(); i++) {
-            System.out.println(books.get(i));
+        for (int i = 0; i < books.getBooks().size(); i++) {
+            System.out.println(books.getBooks().get(i));
         }
         System.out.println("=====================");
     }
@@ -123,7 +121,7 @@ public class Admin_Function {
         Scanner n3 = new Scanner(System.in);
         System.out.println("Please enter book Cattegory : ");
         String N3 = n3.nextLine();
-        Bookcategory cattegoryS = Bookcategory.valueOf(N3);
+        Enum.Bookcategory cattegoryS = Enum.Bookcategory.valueOf(N3);
         for (Book book : books.getBooks()) {
             if (book.getBookcategory().equals(cattegoryS)) {
 
@@ -140,7 +138,7 @@ public class Admin_Function {
         Scanner n4 = new Scanner(System.in);
         System.out.println("Please enter book Status : ");
         String N4 = n4.nextLine();
-        Bookstatus bookstatus = Bookstatus.valueOf(N4);
+        Enum.Bookstatus bookstatus = Enum.Bookstatus.valueOf(N4);
         for (Book book : books.getBooks()) {
             if (book.getBookstatus().equals(bookstatus)) printOut(book);
             else if (book.getBookstatus().equals(bookstatus)) {
@@ -186,7 +184,7 @@ public class Admin_Function {
             return BookN1.compareTo(BookN2);
         }
     };
-
+    //=========================================================================================//
 
     //=================================== CHANG STATE BOOK ============================================//
     public static void changStatus(Bookshelf books) {
@@ -195,7 +193,7 @@ public class Admin_Function {
         String id = ch.nextLine();
         for (Book book : books.getBooks()) {
             if (book.getBookcode().equals(id)) {
-                Bookstatus chang = Bookstatus.valueOf("BUSY");
+                Enum.Bookstatus chang = Enum.Bookstatus.valueOf("BUSY");
                 book.setBookstatus(chang);
                 System.out.println("BookStatus :" + book.getBookstatus());
             }
@@ -203,24 +201,23 @@ public class Admin_Function {
     }
 
 
-
     //=================================== Permits STATE BOOK ============================================//
-    public static void permits(List<Book> books) {
+    public static void permits(Bookshelf books) {
         Scanner n = new Scanner(System.in);
         System.out.println("========Bollow Book=========");
         System.out.println("Please enter code name : ");
         String nameS = n.nextLine();
         System.out.println("============================");
-        Iterator<Book> iterator = books.iterator();
+        Iterator<Book> iterator = books.getBooks().iterator();
         boolean isFound = false;
         while (iterator.hasNext()) {
-            Controller controller = new Controller();
+//            Controller controller = new Controller();
             Book book = iterator.next();
             if (book.getBookcode().equalsIgnoreCase(nameS)) {
                 isFound = true;
-                if ((book.getBookstatus().equals(Bookstatus.BLANK))) {
+                if ((book.getBookstatus().equals(Enum.Bookstatus.BLANK))) {
                     book.setBollow(LocalDate.now());
-                    book.setBookstatus(Bookstatus.BUSY);
+                    book.setBookstatus(Enum.Bookstatus.BUSY);
                     printOut(book);
                 } else {
                     System.out.println("Book is not" + book.getBookstatus());
@@ -235,22 +232,22 @@ public class Admin_Function {
 
 
     //=================================== Return STATE BOOK ============================================//
-    public static void returnbook(List<Book>books){
+    public static void returnbook(Bookshelf books){
         Scanner n = new Scanner(System.in);
         System.out.println("========Return Book=========");
         System.out.println("Please enter code name : ");
         String nameS = n.nextLine();
         System.out.println("============================");
-        Iterator<Book> iterator = books.iterator();
+        Iterator<Book> iterator = books.getBooks().iterator();
         boolean returnb = false;
         while (iterator.hasNext()) {
             Controller controller = new Controller();
             Book book = iterator.next();
             if (book.getBookcode().equalsIgnoreCase(nameS)) {
                 returnb = true;
-                if ((book.getBookstatus().equals(Bookstatus.BUSY))) {
+                if ((book.getBookstatus().equals(Enum.Bookstatus.BUSY))) {
                     book.setReturns(LocalDate.now());
-                    book.setBookstatus(Bookstatus.BLANK);
+                    book.setBookstatus(Enum.Bookstatus.BLANK);
                     printOut(book);
                 } else {
                     System.out.println("Book is not" + book.getBookstatus());

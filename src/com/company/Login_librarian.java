@@ -5,18 +5,17 @@ import java.util.Scanner;
 
 public class Login_librarian {
 
-    public static void login_librarian(Bookshelf books){
+    public static void login_librarian(Bookshelf books, UserList userList){
 //        Bookshelf books = new Bookshelf() ;
         UserList librarians = new UserList() ;
         UserList.librarian2(librarians);
-        System.out.println("ID : ");
+        System.out.print("ID : ");
         Scanner ID =new Scanner(System.in);
         String id = ID.nextLine();
-        System.out.println("PS : ");
+        System.out.print("PS : ");
         Scanner PS =new Scanner(System.in);
         String ps = PS.nextLine();
         for (librarian librarian : librarians.getLibrarians()) {
-
             if (id.equals(librarian.getId())&& ps.equals(librarian.getPassword())) {
                 while (true) {
                     System.out.println("\nWhat  do you want to do");
@@ -25,7 +24,6 @@ public class Login_librarian {
                     Scanner want = new Scanner(System.in);
                     int ans_2 = want.nextInt();
                     switch (ans_2) {
-
                         case 1:
                             //************************* Add Section *************************//
                             Admin_Function a = new Admin_Function();
@@ -34,8 +32,8 @@ public class Login_librarian {
                         case 2:
                             //************************* Remove Section *************************//
                             Admin_Function remove = new Admin_Function();
-                            Admin_Function.removebook(books.getBooks());
-                            Admin_Function.show(books.getBooks());
+                            Admin_Function.removebook(books);
+                            Admin_Function.show(books);
                             break;
                         case 3:
                             //************************* Search Section *************************//
@@ -108,11 +106,14 @@ public class Login_librarian {
                             Scanner scanner = new Scanner(System.in);
                             String Scanner = scanner.nextLine();
                             switch (Scanner) {
-                                case "1": Admin_Function.permits(books.getBooks()); break;
-                                case "2": Admin_Function.returnbook(books.getBooks()); break;
+                                case "1": Admin_Function.permits(books); break;
+                                case "2": Admin_Function.returnbook(books); break;
                             }
                             break;
                         case 7:
+                            Controller.controller(books,userList);
+//                            Controller controller = new Controller();
+//                            controller.controller(books);
                             break;
                         case 8:
                             //************************* Terminate Section *************************//

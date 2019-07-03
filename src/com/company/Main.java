@@ -13,16 +13,17 @@ public class Main {
         //************************* Variable *************************//
         System.out.println("===========================");
         System.out.println("||                       ||");
-        System.out.println("||   WelCome to Liberry  ||");
+        System.out.println("||   WellCome to Liberry ||");
         System.out.println("||                       ||");
         System.out.println("===========================");
         Controller controller = new Controller() ;
         LocalDate date = LocalDate.now();
         Bookshelf books = new Bookshelf();
+        UserList userlist =new UserList();
+//        History history = new History();
         Bookex bex = new Bookex();
         bex.setbooxEx(books.getBooks());
-        controller.controller(books);
-
+        controller.controller(books,userlist);
         //************************* Login Section *************************//
 
 

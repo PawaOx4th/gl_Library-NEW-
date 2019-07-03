@@ -4,11 +4,11 @@ public class Person {
     private String name, sername;
     private String id ;
     private String password ;
-    private Position position;
+    private Enum.Position position;
 
 
     //==============================Constructer===========================//
-    public Person(String name, String sername, String id, String password, Position position) {
+    public Person(String name, String sername, String id, String password, Enum.Position position) {
         this.name = name;
         this.sername = sername;
         this.id = id;
@@ -29,7 +29,7 @@ public class Person {
     public void setPassword(String password) {
         this.password = password;
     }
-    public void setPosition(Position position) {
+    public void setPosition(Enum.Position position) {
         this.position = position;
     }
 
@@ -46,7 +46,7 @@ public class Person {
     public String getPassword() {
         return password;
     }
-    public Position getPosition() {
+    public Enum.Position getPosition() {
         return position;
     }
 }
