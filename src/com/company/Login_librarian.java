@@ -1,11 +1,12 @@
 package com.company;
 
-import java.util.Collections;
+import com.company.History.History;
+
 import java.util.Scanner;
 
 public class Login_librarian {
 
-    public static void login_librarian(Bookshelf books, UserList userList){
+    public static void login_librarian(Controller.Bookshelf books, UserList userList, History history){
 //        Bookshelf books = new Bookshelf() ;
         UserList librarians = new UserList() ;
         UserList.librarian2(librarians);
@@ -20,18 +21,16 @@ public class Login_librarian {
                 while (true) {
                     System.out.println("\nWhat  do you want to do");
                     System.out.println("1 - Add Book\t2 - Delete Book\t3 - Search\n" +
-                            "4 - ChangStatus\t\t5 - Sort\t\t6 - Permits\n7 - Accept\t\t8 - Exit");
+                            "4 - Check\t\t5 - Sort\t\t6 - Permits\n7 - Return\t\t8 - History\t\t9 - History");
                     Scanner want = new Scanner(System.in);
                     int ans_2 = want.nextInt();
                     switch (ans_2) {
                         case 1:
                             //************************* Add Section *************************//
-                            Admin_Function a = new Admin_Function();
                             Admin_Function.Addbook(books);
                             break;
                         case 2:
                             //************************* Remove Section *************************//
-                            Admin_Function remove = new Admin_Function();
                             Admin_Function.removebook(books);
                             Admin_Function.show(books);
                             break;
@@ -62,8 +61,8 @@ public class Login_librarian {
                             break;
                         case 4:
                             //*************************  ChangStatus *************************//
-                            Admin_Function Chang = new Admin_Function();
-                            Admin_Function.changStatus(books);
+
+                            Admin_Function.changDatereturn(books,userList,history);
                             break;
                         case 5:
                             //*************************  Sort Book *************************//
@@ -101,25 +100,22 @@ public class Login_librarian {
                             break;
                         case 6:
                             //*************************  Permit  *************************//
-                            System.out.println("Please select Function");
-                            System.out.println("1-Petmits\3t  2-Return");
-                            Scanner scanner = new Scanner(System.in);
-                            String Scanner = scanner.nextLine();
-                            switch (Scanner) {
-                                case "1": Admin_Function.permits(books); break;
-                                case "2": Admin_Function.returnbook(books); break;
-                            }
-                            break;
+                            Admin_Function.permits(books);
                         case 7:
-                            Controller.controller(books,userList);
-//                            Controller controller = new Controller();
-//                            controller.controller(books);
+                            Admin_Function.returnbook(books);
                             break;
                         case 8:
+                            for (int i = 0; i < history.getHistories().size(); i++) {
+                                System.out.println(history.getHistories().get(i));
+                            }
+                            break;
+                        case 9 :
                             //************************* Terminate Section *************************//
+                            Controller.controller(books,userList,history);
                             System.out.println("Thank you");
                             System.exit(0);
-//                        loop = false;
+                            break;
+
                     }
                 }
             }

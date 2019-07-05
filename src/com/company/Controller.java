@@ -1,8 +1,12 @@
 package com.company;
+import com.company.History.History;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
-    public static void controller(Bookshelf books,UserList userList){
+    public static void controller(Bookshelf books, UserList userList, History history){
 
         UserList librarians = new UserList() ;
         UserList.librarian2(librarians);
@@ -14,15 +18,24 @@ public class Controller {
         int ans_1 = pos.nextInt();
         if (ans_1 == 1) {
             var Login_librarain = new Login_librarian();
-            Login_librarian.login_librarian(books,userList);
+            Login_librarian.login_librarian(books,userList,history);
             }
              else {
             if (ans_1 == 2) {
              var Login_user = new Login_user() ;
-             Login_user.login_user(books,userList);
+             Login_user.login_user(books,userList,history);
             } else {
                 System.out.println("Sorry please connect again later");
             }
+        }
+    }
+
+    public static class Bookshelf {
+
+        private List<Book> books = new ArrayList<>();
+        public List<Book> getBooks() { return books; }
+        public void setBooks(List<Book> books) {
+            this.books = books;
         }
     }
 }

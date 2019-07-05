@@ -30,6 +30,15 @@ class Book {
         this.bollow = bollow;
     }
 
+    public Book(String bookname, String bookcode, Enum.Bookcategory bookcategory, Enum.Bookstatus bookstatus, LocalDate bollow, LocalDate returns) {
+        this.bookname = bookname;
+        this.bookcode = bookcode;
+        this.bookcategory = bookcategory;
+        this.bookstatus = bookstatus;
+        this.bollow = bollow;
+        this.returns = returns;
+    }
+
     //=======================SetBookStatus============================//
     public void setBookstatus(Enum.Bookstatus bookstatus) {
         this.bookstatus = bookstatus;
@@ -107,5 +116,8 @@ class Book {
     @Override
     public int hashCode() {
         return Objects.hash(bookcode);
+    }
+
+    public void setBollow(String dd_llll_yyyy) {
     }
 }

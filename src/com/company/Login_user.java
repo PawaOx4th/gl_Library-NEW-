@@ -1,10 +1,12 @@
 package com.company;
 
+import com.company.History.History;
+
 import java.util.Scanner;
 
 public class Login_user {
 
-    public static void login_user(Bookshelf Book, UserList userList){
+    public static void login_user(Controller.Bookshelf books, UserList userList, History history){
         UserList librarians = new UserList() ;
         UserList.librarian2(librarians);
         UserList user = new UserList();
@@ -31,17 +33,21 @@ public class Login_user {
                     Scanner usearch = new Scanner(System.in);
                     int Usearch = usearch.nextInt();
                     switch (Usearch){
-                        case 1 :    User_Function.searchBookid(Book);           break;
-                        case 2 :    User_Function.searchBookname(Book);        break;
-                        case 3 :    User_Function.searchBookcatagory(Book);    break;
-                        case 4 :    User_Function.searchBookstatus(Book);       break;
+                        case 1 :    User_Function.searchBookid(books);           break;
+                        case 2 :    User_Function.searchBookname(books);        break;
+                        case 3 :    User_Function.searchBookcatagory(books);    break;
+                        case 4 :    User_Function.searchBookstatus(books);       break;
                     }
                     break;
                 case 2:
                     break;
                 case 3:
+                    User_Function.returnbook(books);
                     break;
                 case 4:
+                    break;
+                case   5:
+                    Controller.controller(books,userList,history);
                     break;
                 default:
             }

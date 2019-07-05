@@ -1,7 +1,6 @@
 package com.company;
-import java.io.FileWriter;
-import java.time.LocalDate;
-import java.util.*;
+import com.company.History.History;
+
 import java.time.LocalDate;
 
 public class Main {
@@ -18,16 +17,14 @@ public class Main {
         System.out.println("===========================");
         Controller controller = new Controller() ;
         LocalDate date = LocalDate.now();
-        Bookshelf books = new Bookshelf();
+        Controller.Bookshelf books = new Controller.Bookshelf();
         UserList userlist =new UserList();
-//        History history = new History();
+        History history = new History();
+        history.HistoryList(history);
         Bookex bex = new Bookex();
         bex.setbooxEx(books.getBooks());
-        controller.controller(books,userlist);
+        controller.controller(books,userlist,history);
         //************************* Login Section *************************//
-
-
-
 
         //************************* Administrator Section *************************//
     }

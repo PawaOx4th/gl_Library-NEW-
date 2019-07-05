@@ -1,6 +1,8 @@
 package com.company;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class User_Function {
@@ -17,7 +19,7 @@ public class User_Function {
         System.out.println("==========================");
     }
     //************************* Search Book *************************//
-    public static void searchBookname(Bookshelf books) {
+    public static void searchBookname(Controller.Bookshelf books) {
         Scanner n = new Scanner(System.in);
         System.out.println("Please enter book name : ");
         String nameS = n.nextLine();
@@ -35,7 +37,7 @@ public class User_Function {
         if(!isState){System.out.println("Please Again Enter Book Code");}
     }
 
-    public static void searchBookid(Bookshelf books) {
+    public static void searchBookid(Controller.Bookshelf books) {
         Scanner n2 = new Scanner(System.in);
         System.out.println("Please enter book code : ");
         String codeS = n2.nextLine();
@@ -56,7 +58,7 @@ public class User_Function {
         }
     }
 
-    public static void searchBookcatagory(Bookshelf books) {
+    public static void searchBookcatagory(Controller.Bookshelf books) {
         Scanner n3 = new Scanner(System.in);
         System.out.println("Please enter book Cattegory : ");
         String N3 = n3.nextLine();
@@ -73,7 +75,7 @@ public class User_Function {
         }
     }
 
-    public static void searchBookstatus(Bookshelf books) {
+    public static void searchBookstatus(Controller.Bookshelf books) {
         Scanner n4 = new Scanner(System.in);
         System.out.println("Please enter book Status : ");
         String N4 = n4.nextLine();
@@ -89,7 +91,7 @@ public class User_Function {
     /*/
     ============================================== Rental ==============================================
      */
-    public static void rentalbook(Bookshelf book,User user){
+    public static void rentalbook(Controller.Bookshelf book, User user){
         LocalDate date = LocalDate.now();
         Scanner inputrentalCode = new Scanner(System.in);
         System.out.print("Book Code: ");
@@ -109,9 +111,32 @@ public class User_Function {
         if (!isState) {
             System.out.println("Please Again Enter Book Code");
         }
-
-
-
+    }
+    //=================================== Return STATE BOOK ============================================//
+    public static void returnbook(Controller.Bookshelf books){
+        Scanner n = new Scanner(System.in);
+        System.out.println("========Return Book=========");
+        System.out.println("Please enter code name : ");
+        String nameS = n.nextLine();
+        System.out.println("============================");
+        Iterator<Book> iterator = books.getBooks().iterator();
+        boolean returnb = false;
+        while (iterator.hasNext()) {
+            Controller controller = new Controller();
+            Book book = iterator.next();
+            if (book.getBookcode().equalsIgnoreCase(nameS)) {
+                returnb = true;
+                if ((book.getBookstatus().equals(Enum.Bookstatus.BLANK))) {
+                    book.setBookstatus(Enum.Bookstatus.Not_Confirmed);
+                    book.setBollow(LocalDate.now().format(DateTimeFormatter.ofPattern("dd LLLL yyyy")));
+//                    book.setReturns(LocalDate.now().plusDays(7));
+                    printOut(book);
+                } else {
+                    System.out.println("Book is not" + book.getBookstatus());
+                }
+            } else {}
+        }
+        if (!returnb){ System.out.println("Please Again Enter Book Code");}
     }
 }
 

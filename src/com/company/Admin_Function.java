@@ -1,9 +1,16 @@
 package com.company;
 
+import com.company.History.History;
+
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Scanner;
+
+import static java.time.temporal.ChronoUnit.DAYS;
+
 
 public class Admin_Function {
 
@@ -19,7 +26,7 @@ public class Admin_Function {
         System.out.println("==========================");
     }
     //========================== ADD BOOK ==========================//
-    public static void Addbook(Bookshelf books) {
+    public static void Addbook(Controller.Bookshelf books) {
         System.out.println("=====================");
         Book book_add = new Book();
         Scanner sb1 = new Scanner(System.in);
@@ -28,21 +35,27 @@ public class Admin_Function {
         System.out.println("Book name : " + bName);
         Scanner sb2 = new Scanner(System.in);
         System.out.print("Please enter book code : ");
-        String bCode = sb1.nextLine();
-        System.out.println("Book name : " + bCode);
+
         Scanner sb4 = new Scanner(System.in);
         System.out.print("Please enter book category : ");
         String bCat = sb1.nextLine();
         Enum.Bookcategory category = Enum.Bookcategory.valueOf(bCat);
         System.out.println("Book name : " + bCat);
-
+        //===================== Generate bookcode ===================//
+        String Genbook = Enum.Bookcategory.valueOf(bCat).getCode();
+        DecimalFormat decimalFormat = new DecimalFormat("000");
+        Random random = new Random();
+        int d = random.nextInt(999);
+        decimalFormat.format(d);
+        String bCode = Genbook + decimalFormat.format(d) ;
+        //------------------------------------------------------------//
         book_add.setBookname(bName);
         book_add.setBookcode(bCode);
         book_add.setBookcategory(Enum.Bookcategory.valueOf(bCat));
         book_add.setBookstatus(Enum.Bookstatus.BLANK);
-
         books.getBooks().add(book_add);
 
+        //===========================================================//
         for (int i = 0; i < books.getBooks().size(); i++) {
             System.out.println(books.getBooks().get(i));
         }
@@ -50,7 +63,7 @@ public class Admin_Function {
     }
 
     //========================== Remove BOOK ==========================//
-    public static void removebook(Bookshelf books) {
+    public static void removebook(Controller.Bookshelf books) {
 
         Scanner dc = new Scanner(System.in);
         System.out.println("\nPlease insert Book code to delete : ");
@@ -68,7 +81,7 @@ public class Admin_Function {
         }
     }
 
-    public static void show(Bookshelf books) {
+    public static void show(Controller.Bookshelf books) {
         System.out.println("=====================");
         System.out.println("this is book in list : ");
         for (int i = 0; i < books.getBooks().size(); i++) {
@@ -78,7 +91,7 @@ public class Admin_Function {
     }
 
     //************************* Search Book *************************//
-    public static void searchBookname(Bookshelf books) {
+    public static void searchBookname(Controller.Bookshelf books) {
         Scanner n = new Scanner(System.in);
         System.out.println("Please enter book name : ");
         String nameS = n.nextLine();
@@ -96,7 +109,7 @@ public class Admin_Function {
         if(!isState){System.out.println("Please Again Enter Book Code");}
     }
 
-    public static void searchBookid(Bookshelf books) {
+    public static void searchBookid(Controller.Bookshelf books) {
         Scanner n2 = new Scanner(System.in);
         System.out.println("Please enter book code : ");
         String codeS = n2.nextLine();
@@ -117,7 +130,7 @@ public class Admin_Function {
         }
     }
 
-    public static void searchBookcatagory(Bookshelf books) {
+    public static void searchBookcatagory(Controller.Bookshelf books) {
         Scanner n3 = new Scanner(System.in);
         System.out.println("Please enter book Cattegory : ");
         String N3 = n3.nextLine();
@@ -134,7 +147,7 @@ public class Admin_Function {
         }
     }
 
-    public static void searchBookstatus(Bookshelf books) {
+    public static void searchBookstatus(Controller.Bookshelf books) {
         Scanner n4 = new Scanner(System.in);
         System.out.println("Please enter book Status : ");
         String N4 = n4.nextLine();
@@ -186,23 +199,52 @@ public class Admin_Function {
     };
     //=========================================================================================//
 
-    //=================================== CHANG STATE BOOK ============================================//
-    public static void changStatus(Bookshelf books) {
+    //=================================== CHANG  BOOK DATE RETURN ============================================//
+    public static void changDatereturn(Controller.Bookshelf books, UserList userList, History history) {
         Scanner ch = new Scanner(System.in);
-        System.out.println("Please input Book code to Chang Status");
+        System.out.println("Please input Book code to Chang Date");
         String id = ch.nextLine();
-        for (Book book : books.getBooks()) {
-            if (book.getBookcode().equals(id)) {
-                Enum.Bookstatus chang = Enum.Bookstatus.valueOf("BUSY");
-                book.setBookstatus(chang);
-                System.out.println("BookStatus :" + book.getBookstatus());
+        boolean found = false;
+        for(Book book : books.getBooks()){
+            if(book.getBookcode().equals(id)){
+                found = true ;
+                if(book.getBookstatus().equals(Enum.Bookstatus.BUSY)){
+                    System.out.println("กรูณาระบุวันที่คืน");
+                    int x = ch.nextInt();
+//                    LocalDate newDate =  book.getReturns().plusDays(x);
+//                    int comparedate = (newDate.compareTo(book.getBollow()));
+//                    DAYS.between(book.getBollow(),book.getReturns().plusDays(x));
+                    if( DAYS.between(book.getBollow(),book.getReturns().plusDays(x)) >= 15){
+                        System.out.println("เกินกำหนดวันที่สามารถยืมได้");
+                        changDatereturn(books,userList,history);
+                    }
+                    book.setReturns(book.getReturns().plusDays(x));
+                }
+                else {
+                    found = false;
+                }
             }
         }
+        if(!found){
+            System.out.println("ไม่เจอ");
+        }
+//        for (Book book : books.getBooks()) {
+//
+//            if (book.getBookcode().equals(id)) {
+//                System.out.println("Please enter date you want extend:");
+//                var Scanner = new Scanner(System.in);
+//                int dateExtend = Scanner.nextInt();
+//                if( dateExtend <= 8){
+//                    book.setReturns(book.getReturns().plusDays(dateExtend));
+//                    printOut(book);
+//                }
+//            }
+//        }
     }
 
 
     //=================================== Permits STATE BOOK ============================================//
-    public static void permits(Bookshelf books) {
+    public static void permits(Controller.Bookshelf books) {
         Scanner n = new Scanner(System.in);
         System.out.println("========Bollow Book=========");
         System.out.println("Please enter code name : ");
@@ -215,9 +257,10 @@ public class Admin_Function {
             Book book = iterator.next();
             if (book.getBookcode().equalsIgnoreCase(nameS)) {
                 isFound = true;
-                if ((book.getBookstatus().equals(Enum.Bookstatus.BLANK))) {
+                if ((book.getBookstatus().equals(Enum.Bookstatus.Not_Confirmed))) {
                     book.setBollow(LocalDate.now());
                     book.setBookstatus(Enum.Bookstatus.BUSY);
+                    book.setReturns(LocalDate.now().plusDays(7));
                     printOut(book);
                 } else {
                     System.out.println("Book is not" + book.getBookstatus());
@@ -232,7 +275,7 @@ public class Admin_Function {
 
 
     //=================================== Return STATE BOOK ============================================//
-    public static void returnbook(Bookshelf books){
+    public static void returnbook(Controller.Bookshelf books){
         Scanner n = new Scanner(System.in);
         System.out.println("========Return Book=========");
         System.out.println("Please enter code name : ");
@@ -245,7 +288,7 @@ public class Admin_Function {
             Book book = iterator.next();
             if (book.getBookcode().equalsIgnoreCase(nameS)) {
                 returnb = true;
-                if ((book.getBookstatus().equals(Enum.Bookstatus.BUSY))) {
+                if ((book.getBookstatus().equals(Enum.Bookstatus.Confirm))) {
                     book.setReturns(LocalDate.now());
                     book.setBookstatus(Enum.Bookstatus.BLANK);
                     printOut(book);
