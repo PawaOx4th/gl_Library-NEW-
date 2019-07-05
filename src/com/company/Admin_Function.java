@@ -214,11 +214,12 @@ public class Admin_Function {
 //                    LocalDate newDate =  book.getReturns().plusDays(x);
 //                    int comparedate = (newDate.compareTo(book.getBollow()));
 //                    DAYS.between(book.getBollow(),book.getReturns().plusDays(x));
-                    if( DAYS.between(book.getBollow(),book.getReturns().plusDays(x)) >= 15){
+                    if( DAYS.between(book.getBollow(),book.getReturns().plusDays(x)) > 15){
                         System.out.println("เกินกำหนดวันที่สามารถยืมได้");
                         changDatereturn(books,userList,history);
                     }
                     book.setReturns(book.getReturns().plusDays(x));
+                    printOut(book);
                 }
                 else {
                     found = false;
@@ -228,18 +229,6 @@ public class Admin_Function {
         if(!found){
             System.out.println("ไม่เจอ");
         }
-//        for (Book book : books.getBooks()) {
-//
-//            if (book.getBookcode().equals(id)) {
-//                System.out.println("Please enter date you want extend:");
-//                var Scanner = new Scanner(System.in);
-//                int dateExtend = Scanner.nextInt();
-//                if( dateExtend <= 8){
-//                    book.setReturns(book.getReturns().plusDays(dateExtend));
-//                    printOut(book);
-//                }
-//            }
-//        }
     }
 
 
