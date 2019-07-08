@@ -1,4 +1,9 @@
-package com.company;
+package com.company.Usergrouplease;
+
+import com.company.Bbook.Book;
+import com.company.Controller;
+import com.company.Enum;
+import com.company.Usergrouplease.User;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,15 +13,14 @@ import java.util.Scanner;
 public class User_Function {
 
     public static  void printOut(Book book){
-
-        System.out.println("==========================");
-        System.out.println("Book Name   : " + book.getBookname());
-        System.out.println("Book Type   : " + book.getBookcategory());
-        System.out.println("Book Code   : " + book.getBookcode());
-        System.out.println("Book Bookstatus :" + book.getBookstatus());
-        System.out.println("Book Date Bollow : " + book.getBollow());
-        System.out.println("Book Date Return : " + book.getReturns());
-        System.out.println("==========================");
+        System.out.println("===================================================================================================================================================");
+        System.out.print("  Book Name:" +"["+ book.getBookname()+"]"+"| ");
+        System.out.print("Book Type:" +"["+ book.getBookcategory()+"]"+"| ");
+        System.out.print("Book Code:" +"["+ book.getBookcode()+"]"+"| ");
+        System.out.print("Book Bookstatus:" +"["+ book.getBookstatus()+"]"+"| ");
+        System.out.print("Book Date Bollow:"+"[" + book.getBollow()+"]"+"| ");
+        System.out.println("Book Date Return:"+"[" + book.getReturns()+"]"+"| ");
+        System.out.print("===================================================================================================================================================");
     }
     //************************* Search Book *************************//
     public static void searchBookname(Controller.Bookshelf books) {
@@ -101,6 +105,8 @@ public class User_Function {
             if (book1.getBookcode().equalsIgnoreCase(code)) {
                 isState = true;
                 if (book1.getBookcode().equalsIgnoreCase(code)) {
+                    book1.setBookstatus(Enum.Bookstatus.Not_Confirmed);
+                    printOut(book1);
 
                 } else {
                     System.out.println("'Sorry your book is not exist to my Grouplease Library");

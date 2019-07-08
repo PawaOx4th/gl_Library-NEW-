@@ -1,4 +1,7 @@
-package com.company;
+package com.company.Bbook;
+import com.company.Bbook.Book;
+import com.company.Enum;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -13,7 +16,7 @@ public class Bookex {
         books.add(new Book("Jojo","L001", Enum.Bookcategory.Love, Enum.Bookstatus.BLANK));
         books.add(new Book("MOON","H001", Enum.Bookcategory.Love, Enum.Bookstatus.BLANK));
         books.add(new Book("thairut","N001", Enum.Bookcategory.News, Enum.Bookstatus.BLANK));
-        books.add(new Book("AAA","N01", Enum.Bookcategory.News, Enum.Bookstatus.BUSY,LocalDate.now(),LocalDate.now().plusDays(7)));
+        books.add(new Book("AAA","N01", Enum.Bookcategory.News, Enum.Bookstatus.Not_Confirmed,LocalDate.now(),LocalDate.now().plusDays(7)));
 
 
     }

@@ -1,4 +1,7 @@
-package com.company;
+package com.company.Librarian;
+
+import com.company.Enum;
+import com.company.Human.Person;
 
 public class librarian extends Person {
 

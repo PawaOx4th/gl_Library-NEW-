@@ -1,12 +1,17 @@
-package com.company;
+package com.company.Librarian;
 
+import com.company.Bbook.Book;
+import com.company.Controller;
 import com.company.History.History;
+import com.company.History.HistoryList;
+import com.company.Human.UserList;
+import com.company.Usergrouplease.User;
 
 import java.util.Scanner;
 
 public class Login_librarian {
 
-    public static void login_librarian(Controller.Bookshelf books, UserList userList, History history){
+    public static void login_librarian(Controller.Bookshelf books, UserList userList,  HistoryList history){
 //        Bookshelf books = new Bookshelf() ;
         UserList librarians = new UserList() ;
         UserList.librarian2(librarians);
@@ -16,12 +21,12 @@ public class Login_librarian {
         System.out.print("PS : ");
         Scanner PS =new Scanner(System.in);
         String ps = PS.nextLine();
-        for (librarian librarian : librarians.getLibrarians()) {
+        for (com.company.Librarian.librarian librarian : librarians.getLibrarians()) {
             if (id.equals(librarian.getId())&& ps.equals(librarian.getPassword())) {
                 while (true) {
                     System.out.println("\nWhat  do you want to do");
                     System.out.println("1 - Add Book\t2 - Delete Book\t3 - Search\n" +
-                            "4 - Check\t\t5 - Sort\t\t6 - Permits\n7 - Return\t\t8 - History\t\t9 - History");
+                            "4 - Check\t\t5 - Sort\t\t6 - Permits\n7 - Return\t\t8 - History\t\t9 - Exit");
                     Scanner want = new Scanner(System.in);
                     int ans_2 = want.nextInt();
                     switch (ans_2) {
@@ -43,7 +48,6 @@ public class Login_librarian {
                             int Searchf = sh.nextInt();
                             switch (Searchf) {
                                 case 1:
-//                                    Admin_Function.searchBookname(books.getBooks());
                                     Admin_Function.searchBookname(books);
                                     break;
                                 case 2:
@@ -62,7 +66,7 @@ public class Login_librarian {
                         case 4:
                             //*************************  ChangStatus *************************//
 
-                            Admin_Function.changDatereturn(books,userList,history);
+                            Admin_Function.changDatereturn(history);
                             break;
                         case 5:
                             //*************************  Sort Book *************************//
@@ -100,9 +104,10 @@ public class Login_librarian {
                             break;
                         case 6:
                             //*************************  Permit  *************************//
-                            Admin_Function.permits(books);
+                            Admin_Function.permits(books,userList,history);
                         case 7:
-                            Admin_Function.returnbook(books);
+                            //*************************  Return  *************************//
+                            Admin_Function.returnbook(books, history);
                             break;
                         case 8:
                             for (int i = 0; i < history.getHistories().size(); i++) {

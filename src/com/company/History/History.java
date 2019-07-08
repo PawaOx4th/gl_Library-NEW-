@@ -101,18 +101,18 @@ public class History {
     }
 //======================== History List ============================//
 
-    private List<History> histories = new ArrayList<>();
-
-    public List<History> getHistories() {   return histories; }
-
-    public void setHistories(List<History> histories) {
-        this.histories = histories;
-    }
-
-    public static void HistoryList(History histories){
-        histories.getHistories().add(new History("Threesome","L999","Pawanachai","",
-                Enum.Bookstatus.BUSY,Enum.Bookcategory.Love,LocalDate.of(2019,7,1),LocalDate.now()));
-    }
+//    private List<History> histories = new ArrayList<>();
+//
+//    public List<History> getHistories() {   return histories; }
+//
+//    public void setHistories(List<History> histories) {
+//        this.histories = histories;
+//    }
+//
+//    public static void HistoryList(History histories){
+//        histories.getHistories().add(new History("Threesome","L999","Pawanachai","",
+//                Enum.Bookstatus.BUSY,Enum.Bookcategory.Love,LocalDate.of(2019,7,1),LocalDate.now()));
+//    }
 
 
     //========================= to String ===========================//
@@ -129,4 +129,6 @@ public class History {
                 ", datereturn =" + datereturn +
                 '}';
     }
+
+
 }

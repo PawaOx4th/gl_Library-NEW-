@@ -1,14 +1,26 @@
-package com.company;
+package com.company.Human;
+
+import com.company.Enum;
+import com.company.Librarian.librarian;
+import com.company.Usergrouplease.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserList {
     private ArrayList librarians = new ArrayList();
     public ArrayList<librarian> getLibrarians() {
         return librarians;
     }
-    private ArrayList users = new ArrayList();
-    public ArrayList<User>getuser(){return  users;}
+    private List users = new ArrayList();
+
+    public List getUsers() {
+        return users;
+    }
+
+    public void setUsers(List users) {
+        this.users = users;
+    }
 
     //==================================================================================================================//
     public void setLibrarians(ArrayList<librarian> librarians) {
@@ -20,8 +32,7 @@ public class UserList {
     }
 
     //==================================================================================================================//
-    public void setUsers(ArrayList<User>users) { this.users=users;}
     public static void users2 (UserList users){
-        users.getuser().add(new User("mart","Bubparn","U001","U001", Enum.Position.user));
+        users.getUsers().add(new User("mart","Bubparn","U001","U001", Enum.Position.user));
     }
 }

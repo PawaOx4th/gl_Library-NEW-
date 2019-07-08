@@ -1,12 +1,17 @@
 package com.company;
+import com.company.Bbook.Book;
 import com.company.History.History;
+import com.company.History.HistoryList;
+import com.company.Human.UserList;
+import com.company.Librarian.Login_librarian;
+import com.company.Usergrouplease.User_main;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
-    public static void controller(Bookshelf books, UserList userList, History history){
+    public static void controller(Bookshelf books, UserList userList, HistoryList history){
 
         UserList librarians = new UserList() ;
         UserList.librarian2(librarians);
@@ -22,7 +27,7 @@ public class Controller {
             }
              else {
             if (ans_1 == 2) {
-             var Login_user = new Login_user() ;
+             var Login_user = new User_main() ;
              Login_user.login_user(books,userList,history);
             } else {
                 System.out.println("Sorry please connect again later");

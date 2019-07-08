@@ -29,8 +29,6 @@ public enum Enum {
     }
 
     public enum Position {
-
-
         librarian,user ;
     }
 

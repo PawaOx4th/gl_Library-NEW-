@@ -1,8 +1,10 @@
-package com.company;
+package com.company.Bbook;
+import com.company.Enum;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
-class Book {
+public class Book {
     //====================== Variable Section ========================//
     protected String bookname,bookcode ;
     protected Enum.Bookcategory bookcategory ;

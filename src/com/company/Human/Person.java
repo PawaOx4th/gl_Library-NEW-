@@ -1,4 +1,6 @@
-package com.company;
+package com.company.Human;
+
+import com.company.Enum;
 
 public class Person {
     private String name, sername;
