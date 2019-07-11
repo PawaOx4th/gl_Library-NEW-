@@ -6,7 +6,6 @@ public enum Enum {
     public enum Bookcategory {
         News("N"),History("H"),Manga("M"),Love("L");
         private String code;
-
         public String getCode() {
             return code;
         }

@@ -1,4 +1,4 @@
-package com.company.Bbook;
+package com.company.Book;
 import com.company.Enum;
 
 import java.time.LocalDate;

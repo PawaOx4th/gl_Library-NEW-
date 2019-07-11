@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryList {
-    public String getHistories;
+    public String HistoriesString;
     private List<History> histories = new ArrayList<>();
 
     public void HistoryList(){
@@ -24,7 +24,8 @@ public class HistoryList {
 
     public static void HistoryList(HistoryList histories){
 
-        histories.getHistories().add(new History("testHisbook","M004","kan","U002",Enum.Bookstatus.Confirm,Enum.Bookcategory.Manga,LocalDate.now(),LocalDate.now().plusDays(7)));
+        histories.getHistories().add(new History("testHisbook","M004","kan",
+                "U002",Enum.Bookstatus.Confirm,Enum.Bookcategory.Manga,LocalDate.now(),LocalDate.now().plusDays(7)));
 
     }
 
