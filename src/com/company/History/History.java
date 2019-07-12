@@ -22,6 +22,16 @@ public class History {
     public History() {
     }
 
+    public History(String bookname, String bookcode, String user, String userid, Enum.Bookstatus bookstatus, Enum.Bookcategory bookcategory, LocalDate dateborrow) {
+        this.bookname = bookname;
+        this.bookcode = bookcode;
+        this.user = user;
+        this.userid = userid;
+        this.bookstatus = bookstatus;
+        this.bookcategory = bookcategory;
+        this.dateborrow = dateborrow;
+    }
+
     public History(String bookname, String bookcode, String user, String userid, Enum.Bookstatus bookstatus, Enum.Bookcategory bookcategory, LocalDate dateborrow, LocalDate datereturn) {
         this.bookname = bookname;
         this.bookcode = bookcode;

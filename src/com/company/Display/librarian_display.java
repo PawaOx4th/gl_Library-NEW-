@@ -8,11 +8,13 @@ public class librarian_display {
 
     //************ Main Function ****************//
     public  static  int librarian_main(){
-        System.out.println("\nWhat  do you want to do");
-        System.out.println("1 - Add Book\t2 - Delete Book\t3 - Search\n" +
-                           "4 - Chang Date\t\t5 - Sort\t\t6 - Permits\n" +
-                           "7 - Return\t\t8 - History\t\t9 - Back"+
-                            "10 - Exit");
+        System.out.print("====================================================");
+        System.out.println("\n\t\t\t[ What  do you want to do ]");
+        System.out.println("1 - Add Book\t    2 - Delete Book\t\t3 - Search\n" +
+                           "4 - Chang Date\t\t5 - Sort\t\t    6 - Permits\n" +
+                           "7 - Return\t\t    8 - History\t\t    9 - Back"+
+                            "\n10 - Exit");
+        System.out.println("====================================================");
         Scanner want = new Scanner(System.in);
         int ans_2 = want.nextInt();
         return ans_2;

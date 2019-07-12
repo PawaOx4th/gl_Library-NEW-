@@ -17,7 +17,9 @@ public class Main {
     public static void main(String[] args) {
 //
 //        //************************* Variable *************************//
-//        System.out.println(DAYS.between(LocalDate.of(2019,7,5),LocalDate.of(2019,7,20)));
+        System.out.println(LocalDate.of(2019,7,1));
+        System.out.println(LocalDate.of(2019,7,1).plusDays(7));
+        System.out.println(LocalDate.of(2019,7,1).plusDays(15));
 
         System.out.println("===========================");
         System.out.println("||                       ||");

@@ -38,7 +38,6 @@ public class Admin_Function {
         }
     } //
 
-
     //========================== ADD BOOK ==========================//
     public static void Addbook() {
         Libraryservice libraryservice = Libraryservice.getInstance();
@@ -49,30 +48,31 @@ public class Admin_Function {
         String bName = sb1.nextLine();
         System.out.println("Book name : " + bName);
         Scanner sb2 = new Scanner(System.in);
-
-
         Scanner sb4 = new Scanner(System.in);
         System.out.print("Please enter book category : ");
         String bCat = sb1.nextLine();
         Enum.Bookcategory category = Enum.Bookcategory.valueOf(bCat);
         System.out.println("Book name : " + bCat);
         //===================== Generate bookcode ===================//
-        String Genbook = Enum.Bookcategory.valueOf(bCat).getCode();
+        Integer runningNo = null;
+        String genbook = Enum.Bookcategory.valueOf(bCat).getCode();
         DecimalFormat decimalFormat = new DecimalFormat("000");
-        Random random = new Random();
-        int d = random.nextInt(999);
-        decimalFormat.format(d);
-        String bCode = Genbook + decimalFormat.format(d) ;
+        for (Book b : libraryservice.getBooks().getBooks()) {
+            if (genbook.equals(b.getBookcode().substring(0,1))) {
+                if (runningNo == null || runningNo < Integer.parseInt(b.getBookcode().substring(1))) {
+                    runningNo = Integer.parseInt(b.getBookcode().substring(1));
+                }
+            }
+        }
+        int number = runningNo + 1;
+        String bCode = genbook + decimalFormat.format(number) ;
+
         //------------------------------------------------------------//
         book_add.setBookname(bName);
         book_add.setBookcode(bCode);
         book_add.setBookcategory(Enum.Bookcategory.valueOf(bCat));
         book_add.setBookstatus(Enum.Bookstatus.BLANK);
         libraryservice.getBooks().getBooks().add(book_add);
-
-        
-
-
 
         //============================ Show Book Add =============================//
         for (int i = 0; i < libraryservice.getBooks().getBooks().size(); i++) {
@@ -309,23 +309,45 @@ public class Admin_Function {
         Login_librarian.mainLibrarian();
     }
     //=================================== Return STATE BOOK ============================================//
-    public static void returnbook(){
+    public static void returnbook() {
         Libraryservice libraryservice = Libraryservice.getInstance();
         Scanner n = new Scanner(System.in);
         System.out.println("========Return Book=========");
         System.out.println("Please enter book code: ");
         String bookCode = n.nextLine();
-        Iterator<History>historyIterator = libraryservice.getHistoryList().getHistories().iterator();
+        Iterator<History> historyIterator = libraryservice.getHistoryList().getHistories().iterator();
         boolean returnbook = false;
         while (historyIterator.hasNext()) {
-                History historybook = historyIterator.next();
+            History historybook = historyIterator.next();
             if (historybook.getBookcode().equalsIgnoreCase(bookCode)) {
                 returnbook = true;
                 if (historybook.getBookcode().equals(bookCode)) {
-                    if (historybook.getBookstatus().equals(Enum.Bookstatus.Confirm)){
+                    if (historybook.getBookstatus().equals(Enum.Bookstatus.Confirm)) {
                         historybook.setBookstatus(Enum.Bookstatus.BLANK);
-                        historybook.setDatereturn(LocalDate.now());
-                        for (Book book:libraryservice.getBooks().getBooks() ) {
+//                        historybook.setDatereturn(LocalDate.now());
+
+
+                        //******************************** Check Date delay ********************************//
+//                        int Setback = Integer.parseInt(String.valueOf(DAYS.between(historybook.getDatereturn().plusDays(15),historybook.getDateborrow())));
+//                        int Daterate = Integer.parseInt(String.valueOf(DAYS.between(historybook.getDatereturn(),historybook.getDateborrow().plusDays(7))));
+//                        int Setback = Integer.parseInt(String.valueOf(DAYS.between(historybook.getDatereturn(), historybook.getDateborrow())));
+//                        int Daterate = Integer.parseInt(String.valueOf(DAYS.between(historybook.getDatereturn(), historybook.getDateborrow().plusDays(8))));
+//                        int checkDate =  Daterate - Setback;
+//                        if (checkDate <= 15) {
+//                            System.out.println("No Delay");
+//
+//                        }
+//                        else {
+//                            System.out.println("Beyond the specified period Delay: "+ checkDate);
+//                        }
+                        // **************** Date Check **************** //
+                        int x = (int) DAYS.between(historybook.getDatereturn(), LocalDate.now()); // Check DateReturn.  with DateNow.
+                        if (x>0){
+                            System.out.println(" You return book late "+x+" day(s)");
+                        }
+                        //**********************************************************************************//
+
+                        for (Book book : libraryservice.getBooks().getBooks()) {
                             if (book.getBookcode().equals(bookCode)) {
                                 book.setBookstatus(Enum.Bookstatus.BLANK);
                                 printOut(book);
@@ -340,7 +362,9 @@ public class Admin_Function {
 
             }
         }
-        if (!returnbook){ System.out.println("Please Again Enter Book Code");}
+        if (!returnbook) {
+            System.out.println("Please Again Enter Book Code");
+        }
     }
 }
 
