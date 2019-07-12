@@ -1,12 +1,10 @@
 package com.company.Librarian;
 
 import com.company.Book.Book;
-import com.company.Book.Bookshelf;
-import com.company.Display.librarian_display;
 import com.company.Enum;
 import com.company.History.History;
 import com.company.Service.Libraryservice;
-import com.company.Usergrouplease.User;
+import com.company.Users.User;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.*;
@@ -26,10 +24,9 @@ public class Admin_Function {
         System.out.print("Book Bookstatus: " +"["+ book.getBookstatus()+"]"+"| ");
         System.out.print("Book Date Bollow: "+"[" + book.getBollow()+"]"+"| ");
         System.out.println("Book Date Return:"+"[" + book.getReturns()+"]"+"| ");
-        System.out.print("====================================================================================================================================================");
+        System.out.println("====================================================================================================================================================");
 
     }
-
     public static void showHistory(){
         //*************************  Show History *************************//
         Libraryservice libraryservice = Libraryservice.getInstance();
@@ -78,7 +75,6 @@ public class Admin_Function {
         for (int i = 0; i < libraryservice.getBooks().getBooks().size(); i++) {
             System.out.println(libraryservice.getBooks().getBooks().get(i));
         }
-        System.out.println("=====================");
     }
 
     //========================== Remove BOOK ==========================//
@@ -96,8 +92,8 @@ public class Admin_Function {
             } else if (book.getBookcode().equalsIgnoreCase(id)) {
                 System.out.println("Sorry your book code is not exist");
             }
-
         }
+        showHistory();
     }
     public static void show() {
         Libraryservice libraryservice = Libraryservice.getInstance();
@@ -197,6 +193,7 @@ public class Admin_Function {
     }
 
     //=================================== SORT BOOK ============================================//
+
     //************************* Sort by name  *************************//
     public static Comparator<Book> comparatorname = new Comparator<Book>() {
         @Override
@@ -265,6 +262,7 @@ public class Admin_Function {
         }
     }
 
+
     //=================================== Permits STATE BOOK ============================================//
     public static void permits() {
         Libraryservice libraryservice = Libraryservice.getInstance();
@@ -282,16 +280,7 @@ public class Admin_Function {
             if (book.getBookcode().equalsIgnoreCase(codeS)) {
                 isFound = true;
                 if (book.getBookstatus().equals(Enum.Bookstatus.BLANK)) { //Seach by BookStatus
-                    book.setBookstatus(Enum.Bookstatus.BUSY);
-                    history.setBookname(book.getBookname());
-                    history.setBookcode(book.getBookcode());
-                    history.setUserid(user.getId());
-                    history.setUser(user.getName());
-                    history.setBookstatus(Enum.Bookstatus.Confirm);
-                    history.setBookcategory(book.getBookcategory());
-                    history.setDateborrow(LocalDate.now());
-                    history.setDatereturn(LocalDate.now().plusDays(7));
-                    libraryservice.getHistoryList().getHistories().add(history);
+                    addTohistory(book,user);
                     showHistory();
                     System.out.println("\n");
                 } else {
@@ -308,6 +297,21 @@ public class Admin_Function {
         }
         Login_librarian.mainLibrarian();
     }
+    public static void addTohistory(Book book,User user){
+        Libraryservice libraryservice = Libraryservice.getInstance();
+        History history = new History();
+        book.setBookstatus(Enum.Bookstatus.BUSY);
+        history.setBookname(book.getBookname());
+        history.setBookcode(book.getBookcode());
+        history.setUserid(user.getId());
+        history.setUser(user.getName());
+        history.setBookstatus(Enum.Bookstatus.Confirm);
+        history.setBookcategory(book.getBookcategory());
+        history.setDateborrow(LocalDate.now());
+        history.setDatereturn(LocalDate.now().plusDays(7));
+        libraryservice.getHistoryList().getHistories().add(history);
+    }
+
     //=================================== Return STATE BOOK ============================================//
     public static void returnbook() {
         Libraryservice libraryservice = Libraryservice.getInstance();
@@ -324,29 +328,13 @@ public class Admin_Function {
                 if (historybook.getBookcode().equals(bookCode)) {
                     if (historybook.getBookstatus().equals(Enum.Bookstatus.Confirm)) {
                         historybook.setBookstatus(Enum.Bookstatus.BLANK);
-//                        historybook.setDatereturn(LocalDate.now());
-
-
-                        //******************************** Check Date delay ********************************//
-//                        int Setback = Integer.parseInt(String.valueOf(DAYS.between(historybook.getDatereturn().plusDays(15),historybook.getDateborrow())));
-//                        int Daterate = Integer.parseInt(String.valueOf(DAYS.between(historybook.getDatereturn(),historybook.getDateborrow().plusDays(7))));
-//                        int Setback = Integer.parseInt(String.valueOf(DAYS.between(historybook.getDatereturn(), historybook.getDateborrow())));
-//                        int Daterate = Integer.parseInt(String.valueOf(DAYS.between(historybook.getDatereturn(), historybook.getDateborrow().plusDays(8))));
-//                        int checkDate =  Daterate - Setback;
-//                        if (checkDate <= 15) {
-//                            System.out.println("No Delay");
-//
-//                        }
-//                        else {
-//                            System.out.println("Beyond the specified period Delay: "+ checkDate);
-//                        }
-                        // **************** Date Check **************** //
                         int x = (int) DAYS.between(historybook.getDatereturn(), LocalDate.now()); // Check DateReturn.  with DateNow.
                         if (x>0){
                             System.out.println(" You return book late "+x+" day(s)");
+                        }else {
+                            System.out.println("Return Book Success >_<' ");
                         }
                         //**********************************************************************************//
-
                         for (Book book : libraryservice.getBooks().getBooks()) {
                             if (book.getBookcode().equals(bookCode)) {
                                 book.setBookstatus(Enum.Bookstatus.BLANK);

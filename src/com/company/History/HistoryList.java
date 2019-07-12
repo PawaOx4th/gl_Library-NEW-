@@ -35,5 +35,5 @@ public class HistoryList {
 
         histories.getHistories().add(new History("testHisbook","M004","kan","U002",Enum.Bookstatus.Confirm,
                 Enum.Bookcategory.Manga,LocalDate.now().minusDays(11),LocalDate.now().minusDays(1)));
-    }
+}
 }

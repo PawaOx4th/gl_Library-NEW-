@@ -7,12 +7,13 @@ import com.company.Display.librarian_display;
 import com.company.History.HistoryList;
 import com.company.Human.UserList;
 import com.company.Service.Libraryservice;
+
 import java.util.InputMismatchException;
 
 public class Login_librarian {
     private static Libraryservice libraryservice = Libraryservice.getInstance();
-    public static void login_librarian(Bookshelf books, UserList userList, HistoryList history) {
 
+    public static void login_librarian(Bookshelf books, UserList userList, HistoryList history) {
         Libraryservice libraryservice = Libraryservice.getInstance();
         String[] account = librarian_display.library_login();
         for (Librarian librarian : libraryservice.getLibrarianList().getLibrarians()) {
@@ -20,14 +21,15 @@ public class Login_librarian {
                 mainLibrarian();
             } else {
                 System.out.println("[ There are not exist in database. ]\n");
-                Controller.controller(books,userList,history);
+                Controller.controller(books, userList, history);
             }
         }
     }
+
     static void mainLibrarian() {
         try {
             while (true) {
-                Libraryservice.getInstance() ;
+                Libraryservice.getInstance();
                 int ans_2 = librarian_display.librarian_main();
                 switch (ans_2) {
                     case 1:
@@ -37,7 +39,6 @@ public class Login_librarian {
                     case 2:
                         //************************* Remove Section *************************//
                         Admin_Function.removebook();
-                        Admin_Function.show();
                         break;
                     case 3:
                         //************************* Search Section *************************//
@@ -65,16 +66,13 @@ public class Login_librarian {
                         //*************************  Sort Book *************************//
                         int SortFx = librarian_display.librarian_sortDisplay();
                         switch (SortFx) {
-
                             case 1:
-
                                 libraryservice.getBooks().getBooks().sort(Admin_Function.comparatorname);  //coloections.sort('List Book),'Class'.'Comparator object'
                                 for (Book book : libraryservice.getBooks().getBooks()) {
                                     System.out.println(book);
                                 }
                                 break;
                             case 2:
-
                                 libraryservice.getBooks().getBooks().sort(Admin_Function.comparatorcode);  //coloections.sort('List Book),'Class'.'Comparator object'
                                 for (Book book : libraryservice.getBooks().getBooks()) {
                                     System.out.println(book);
@@ -109,11 +107,7 @@ public class Login_librarian {
                         break;
                     case 9:
                         //************************* Terminate Section *************************//
-//                        Book book =new Book();
-//                        UserList userList1 = new UserList();
-//                        HistoryList historyList = new HistoryList();
-                        Controller.controller(libraryservice.getBooks(),libraryservice.getUserList(),libraryservice.getHistoryList());
-
+                        Controller.controller(libraryservice.getBooks(), libraryservice.getUserList(), libraryservice.getHistoryList());
                         break;
                     case 10:
                         System.out.println("Thank you");
@@ -123,7 +117,6 @@ public class Login_librarian {
             }
         } catch (InputMismatchException e) {
             System.out.println("[ There are not exist in database.\n ]");
-
         }
     }
 }
