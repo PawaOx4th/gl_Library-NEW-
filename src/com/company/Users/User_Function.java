@@ -8,6 +8,8 @@ import com.company.Service.Libraryservice;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.UUID;
+
 import static java.time.temporal.ChronoUnit.DAYS;
 
 class User_Function {
@@ -147,6 +149,8 @@ class User_Function {
         Libraryservice libraryservice = Libraryservice.getInstance();                   //success
         History history = new History();
         Scanner inputrentalCode = new Scanner(System.in);
+        UUID uuid = UUID.randomUUID();
+        String randomUUIDString = uuid.toString();
         System.out.print("Book Code: ");
         String code = inputrentalCode.nextLine();
         boolean isState = false;
@@ -154,6 +158,7 @@ class User_Function {
             if (book.getBookcode().equals(code)) {
                 isState = true;
                 if (book.getBookstatus().equals(Enum.Bookstatus.BLANK)) {
+                    history.setUUID(randomUUIDString);
                     history.setBookstatus(Enum.Bookstatus.Not_Confirmed);
                     history.setBookname(book.getBookname());                            //Bookname
                     history.setBookcode(book.getBookcode());                            //Bookcode

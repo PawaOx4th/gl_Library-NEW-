@@ -8,13 +8,12 @@ import java.util.List;
 
 public class History {
 
+    private  String UUID ;
     private String bookname,bookcode,user,userid;
     private Enum.Bookstatus bookstatus;
     private Enum.Bookcategory bookcategory;
     private LocalDate dateborrow;
     private LocalDate datereturn;
-
-
 
     //========================= Constructer ===============================//
 
@@ -44,6 +43,10 @@ public class History {
     }
 
     //======================== Getter =====================================//
+
+    public String getUUID() {
+        return UUID;
+    }
 
     public String getBookname() {
         return bookname;
@@ -77,6 +80,11 @@ public class History {
         return datereturn;
     }
 //=======================================Setter =============================//
+
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
 
     public void setBookname(String bookname) {
         this.bookname = bookname;
@@ -115,7 +123,8 @@ public class History {
     @Override
     public String toString() {
         return "==================================================================================================================================================================================================================================="+"\n"
-                + "  Book Name: [" +getBookname()+"] |"
+                + "  UUID : [" +getUUID()+"]"+"  ||  "
+                + " Book Name: [" +getBookname()+"] |"
                 + "Book Code: [" + getBookcode()+"] |"
                 + "Book Type: ["+ getBookcategory()+"] |"
                 + "Book Code: [" + getBookcode()+"] |"
