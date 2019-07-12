@@ -27,7 +27,7 @@ public class Login_librarian {
     static void mainLibrarian() {
         try {
             while (true) {
-
+                Libraryservice.getInstance() ;
                 int ans_2 = librarian_display.librarian_main();
                 switch (ans_2) {
                     case 1:
@@ -103,18 +103,21 @@ public class Login_librarian {
                         break;
                     case 8:
                         //*************************  Show History *************************//
-
                         for (int i = 0; i < libraryservice.getHistoryList().getHistories().size(); i++) {
                             System.out.println(libraryservice.getHistoryList().getHistories().get(i));
                         }
                         break;
                     case 9:
                         //************************* Terminate Section *************************//
-                        System.out.println("Thank you");
-                        System.exit(0);
+//                        Book book =new Book();
+//                        UserList userList1 = new UserList();
+//                        HistoryList historyList = new HistoryList();
+                        Controller.controller(libraryservice.getBooks(),libraryservice.getUserList(),libraryservice.getHistoryList());
+
                         break;
                     case 10:
-                        Admin_Function.showHistory();
+                        System.out.println("Thank you");
+                        System.exit(0);
                         break;
                 }
             }

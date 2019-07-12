@@ -168,7 +168,6 @@ class User_Function {
                     history.setUserid(libraryservice.getUser().getId());                //UserID
                     libraryservice.getHistoryList().getHistories().add(history);
                     printHistory();
-
                 } else {
                     System.out.println("'Sorry your book is not exist to my Grouplease Library");
                 }
@@ -181,32 +180,36 @@ class User_Function {
     /*=========================================== Return STATE BOOK ==============================================*/
     public static void returnbook(){
         Libraryservice libraryservice = Libraryservice.getInstance();
-//        Userservice userservice = Userservice.getInstance();
-        printHistory();
         Scanner n = new Scanner(System.in);
         System.out.println("========Return Book=========");
-        System.out.println("Please enter code name : ");
-        String nameS = n.nextLine();
-        System.out.println("============================");
-        Iterator<Book> iterator = libraryservice.getBooks().getBooks().iterator();
-        boolean returnb = false;
-        while (iterator.hasNext()) {
-            Controller controller = new Controller();
-            Book book = iterator.next();
-            if (book.getBookcode().equalsIgnoreCase(nameS)) {
-                returnb = true;
-                if ((book.getBookstatus().equals(Enum.Bookstatus.BLANK))) {
-                    book.setBookstatus(Enum.Bookstatus.Not_Confirmed);
-                    book.setBollow(LocalDate.now().format(DateTimeFormatter.ofPattern("dd LLLL yyyy")));
-//                    book.setReturns(LocalDate.now().plusDays(7));
-                    printHistory();
+        System.out.println("Please enter book code: ");
+        String bookCode = n.nextLine();
+        Iterator<History>historyIterator = libraryservice.getHistoryList().getHistories().iterator();
+        boolean returnbook = false;
+        while (historyIterator.hasNext()) {
+            History historybook = historyIterator.next();
+            if (historybook.getBookcode().equalsIgnoreCase(bookCode)) {
+                returnbook = true;
+                if (historybook.getBookcode().equals(bookCode)) {
+                    if (historybook.getBookstatus().equals(Enum.Bookstatus.Confirm)){
+                        historybook.setBookstatus(Enum.Bookstatus.BLANK);
+                        historybook.setDatereturn(LocalDate.now());
+                        for (Book book:libraryservice.getBooks().getBooks() ) {
+                            if (book.getBookcode().equals(bookCode)) {
+                                book.setBookstatus(Enum.Bookstatus.BLANK);
+                                printOut(book);
+                            }
+                        }
+                        printHistory();
+                    }
                 } else {
-                    System.out.println("Book is not" + book.getBookstatus());
+                    System.out.println("Book is not");
                 }
-            } else {}
-        }
-        if (!returnb){ System.out.println("Please Again Enter Book Code");}
-    }
+            } else {
 
+            }
+        }
+        if (!returnbook){ System.out.println("Please Again Enter Book Code");}
+    }
 }
 

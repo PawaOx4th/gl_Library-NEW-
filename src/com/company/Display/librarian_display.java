@@ -11,7 +11,8 @@ public class librarian_display {
         System.out.println("\nWhat  do you want to do");
         System.out.println("1 - Add Book\t2 - Delete Book\t3 - Search\n" +
                            "4 - Chang Date\t\t5 - Sort\t\t6 - Permits\n" +
-                           "7 - Return\t\t8 - History\t\t9 - Exit");
+                           "7 - Return\t\t8 - History\t\t9 - Back"+
+                            "10 - Exit");
         Scanner want = new Scanner(System.in);
         int ans_2 = want.nextInt();
         return ans_2;
