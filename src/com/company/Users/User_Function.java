@@ -1,15 +1,11 @@
-package com.company.Usergrouplease;
+package com.company.Users;
 
 import com.company.Book.Book;
-import com.company.Book.Bookshelf;
-import com.company.Controller;
 import com.company.Display.user_Display;
 import com.company.Enum;
 import com.company.History.History;
-import com.company.History.HistoryList;
 import com.company.Service.Libraryservice;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Scanner;
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -35,6 +31,26 @@ class User_Function {
         }
     }
     /*============================================== Search Book ==============================================*/
+    public static void searchBookname() {
+        Libraryservice libraryservice = Libraryservice.getInstance();
+//        Userservice userservice = Userservice.getInstance();
+        Scanner n = new Scanner(System.in);
+        System.out.println("Please enter book name : ");
+        String nameS = n.nextLine();
+        boolean isState = false;
+        for (Book book : libraryservice.getBooks().getBooks()) {
+            if (book.getBookname().equalsIgnoreCase(nameS)) {
+                isState = true;
+                if (book.getBookname().equalsIgnoreCase(nameS)) {
+                    printOut(book);
+                    user_Display.userManu();
+                } else {
+                    System.out.println("'Sorry your book is not exist to my Grouplease Library");
+                }
+            }
+        }
+        if(!isState){System.out.println("Please Again Enter Book Code");}
+    }
     public static void seachBookcode() {
         Libraryservice libraryservice = Libraryservice.getInstance();
 //        Userservice userservice = Userservice.getInstance();
@@ -57,26 +73,6 @@ class User_Function {
         if (!isState) {
             System.out.println("Please Again Enter Book Code");
         }
-    }
-    public static void searchBookname() {
-        Libraryservice libraryservice = Libraryservice.getInstance();
-//        Userservice userservice = Userservice.getInstance();
-        Scanner n = new Scanner(System.in);
-        System.out.println("Please enter book name : ");
-        String nameS = n.nextLine();
-        boolean isState = false;
-        for (Book book : libraryservice.getBooks().getBooks()) {
-            if (book.getBookname().equalsIgnoreCase(nameS)) {
-                isState = true;
-                if (book.getBookname().equalsIgnoreCase(nameS)) {
-                    printOut(book);
-                    user_Display.userManu();
-                } else {
-                    System.out.println("'Sorry your book is not exist to my Grouplease Library");
-                }
-            }
-        }
-        if(!isState){System.out.println("Please Again Enter Book Code");}
     }
     public static void searchBookcatagory() {
         Libraryservice libraryservice = Libraryservice.getInstance();
@@ -148,7 +144,7 @@ class User_Function {
 
     /*================================================= Rental ===================================================*/
     public static void rentalbook(){
-        Libraryservice libraryservice = Libraryservice.getInstance();
+        Libraryservice libraryservice = Libraryservice.getInstance();                   //success
         History history = new History();
         Scanner inputrentalCode = new Scanner(System.in);
         System.out.print("Book Code: ");
@@ -175,7 +171,7 @@ class User_Function {
             }
         }
         if (!isState) { System.out.println("Please Again Enter Book Code");}
-    }  //success
+    }
 
     /*=========================================== Return STATE BOOK ==============================================*/
     public static void returnbook(){
