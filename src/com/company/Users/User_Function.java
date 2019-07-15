@@ -155,7 +155,7 @@ class User_Function {
         String code = inputrentalCode.nextLine();
         boolean isState = false;
         for (Book book : libraryservice.getBooks().getBooks()) {
-            if (book.getBookcode().equals(code)) {
+            if (book.getBookcode().equalsIgnoreCase(code)) {
                 isState = true;
                 if (book.getBookstatus().equals(Enum.Bookstatus.BLANK)) {
                     history.setUUID(randomUUIDString);
@@ -207,7 +207,6 @@ class User_Function {
                     System.out.println("Book is not");
                 }
             } else {
-
             }
         }
         if (!returnbook){ System.out.println("Please Again Enter Book Code");}

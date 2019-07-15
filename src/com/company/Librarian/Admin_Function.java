@@ -5,10 +5,13 @@ import com.company.Enum;
 import com.company.History.History;
 import com.company.Service.Libraryservice;
 import com.company.Users.User;
+
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.*;
-
+import java.util.Comparator;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.Scanner;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -16,18 +19,19 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class Admin_Function {
 
 
-    public static  void printOut(Book book){
+    public static void printOut(Book book) {
         System.out.println("====================================================================================================================================================");
-        System.out.print("  Book Name: " +"["+ book.getBookname()+"]"+"| ");
-        System.out.print("Book Type: " +"["+ book.getBookcategory()+"]"+"| ");
-        System.out.print("Book Code:" +"["+ book.getBookcode()+"]"+"| ");
-        System.out.print("Book Bookstatus: " +"["+ book.getBookstatus()+"]"+"| ");
-        System.out.print("Book Date Bollow: "+"[" + book.getBollow()+"]"+"| ");
-        System.out.println("Book Date Return:"+"[" + book.getReturns()+"]"+"| ");
+        System.out.print("  Book Name: " + "[" + book.getBookname() + "]" + "| ");
+        System.out.print("Book Type: " + "[" + book.getBookcategory() + "]" + "| ");
+        System.out.print("Book Code:" + "[" + book.getBookcode() + "]" + "| ");
+        System.out.print("Book Bookstatus: " + "[" + book.getBookstatus() + "]" + "| ");
+        System.out.print("Book Date Bollow: " + "[" + book.getBollow() + "]" + "| ");
+        System.out.println("Book Date Return:" + "[" + book.getReturns() + "]" + "| ");
         System.out.println("====================================================================================================================================================");
 
     }
-    public static void showHistory(){
+
+    public static void showHistory() {
         //*************************  Show History *************************//
         Libraryservice libraryservice = Libraryservice.getInstance();
         for (int i = 0; i < libraryservice.getHistoryList().getHistories().size(); i++) {
@@ -55,14 +59,14 @@ public class Admin_Function {
         String genbook = Enum.Bookcategory.valueOf(bCat).getCode();
         DecimalFormat decimalFormat = new DecimalFormat("000");
         for (Book b : libraryservice.getBooks().getBooks()) {
-            if (genbook.equals(b.getBookcode().substring(0,1))) {
+            if (genbook.equals(b.getBookcode().substring(0, 1))) {
                 if (runningNo == null || runningNo < Integer.parseInt(b.getBookcode().substring(1))) {
                     runningNo = Integer.parseInt(b.getBookcode().substring(1));
                 }
             }
         }
         int number = runningNo + 1;
-        String bCode = genbook + decimalFormat.format(number) ;
+        String bCode = genbook + decimalFormat.format(number);
 
         //------------------------------------------------------------//
         book_add.setBookname(bName);
@@ -95,6 +99,7 @@ public class Admin_Function {
         }
         showHistory();
     }
+
     public static void show() {
         Libraryservice libraryservice = Libraryservice.getInstance();
         System.out.println("=====================");
@@ -122,7 +127,9 @@ public class Admin_Function {
                 }
             }
         }
-        if(!isState){System.out.println("Please Again Enter Book Code");}
+        if (!isState) {
+            System.out.println("Please Again Enter Book Code");
+        }
     }
 
     public static void searchBookid() {
@@ -174,20 +181,18 @@ public class Admin_Function {
         boolean found = false;
         for (Book book : libraryservice.getBooks().getBooks()) {
             if (book.getBookstatus().equals(bookstatus)) {
-                found = true ;
-                if(book.getBookstatus().equals(bookstatus)){
+                found = true;
+                if (book.getBookstatus().equals(bookstatus)) {
                     printOut(book);
-                }
-                else {
+                } else {
                     System.out.println("'Sorry your book is not exist to my Grouplease  Library");
 
                 }
-            }
-            else {
+            } else {
                 found = false;
             }
         }
-        if(!found){
+        if (!found) {
             System.out.println("ไม่เจอ");
         }
     }
@@ -239,25 +244,24 @@ public class Admin_Function {
         System.out.println("Please input Book code to Chang Date");
         String id = ch.nextLine();
         boolean found = false;
-        for(History history1 : libraryservice.getHistoryList().getHistories()){
-            if(history1.getBookcode().equals(id)){
-                found = true ;
-                if(history1.getBookstatus().equals(Enum.Bookstatus.Not_Confirmed)){
+        for (History history1 : libraryservice.getHistoryList().getHistories()) {
+            if (history1.getBookcode().equals(id)) {
+                found = true;
+                if (history1.getBookstatus().equals(Enum.Bookstatus.Not_Confirmed)) {
                     System.out.println("กรูณาระบุวันที่คืน");
                     int x = ch.nextInt();
-                    if( DAYS.between(history1.getDatereturn(),history1.getDatereturn().plusDays(x)) > 15){
+                    if (DAYS.between(history1.getDatereturn(), history1.getDatereturn().plusDays(x)) > 15) {
                         System.out.println("เกินกำหนดวันที่สามารถยืมได้");
                         changDatereturn();
                     }
                     history1.setDatereturn(history1.getDatereturn().plusDays(x));
                     showHistory();
-                }
-                else {
+                } else {
                     found = false;
                 }
             }
         }
-        if(!found){
+        if (!found) {
             System.out.println("ไม่เจอ");
         }
     }
@@ -273,6 +277,7 @@ public class Admin_Function {
         String codeS = n.nextLine();
         Iterator<Book> bookIterator = libraryservice.getBooks().getBooks().iterator();
         Iterator<User> userIterator = libraryservice.getUserList().getUsers().iterator();
+        Iterator<History> historyIterator = libraryservice.getHistoryList().getHistories().iterator();
         User user = userIterator.next();
         boolean isFound = false;
         while (bookIterator.hasNext()) {
@@ -280,37 +285,51 @@ public class Admin_Function {
             if (book.getBookcode().equalsIgnoreCase(codeS)) {
                 isFound = true;
                 if (book.getBookstatus().equals(Enum.Bookstatus.BLANK)) { //Seach by BookStatus
-                    addTohistory(book,user);
-                    showHistory();
-                    System.out.println("\n");
-                } else {
+                    book.setBookstatus(Enum.Bookstatus.BUSY);
+                    try {
+                        for (History history1 : libraryservice.getHistoryList().getHistories()) {
+                            if (history1.getBookcode().equalsIgnoreCase(codeS) && history1.getBookstatus().equals(Enum.Bookstatus.Not_Confirmed)) {
+                                history1.setBookstatus(Enum.Bookstatus.Confirm);
+                                book.setBookstatus(Enum.Bookstatus.BUSY);
+                                showHistory();
+                            }
+                            System.out.println("\n");
+                        }
+                    } catch (ConcurrentModificationException ignored) {
+                    }
+
+                }
+                else {
                     isFound = false;
                 }
             }
+
         }
-        if (!isFound){
+        if (!isFound) {
             System.out.println("--------------------------------------");
             System.out.println("|    Please Again Enter Book Code    |");
             System.out.println("|            Cannot Books             |");
             System.out.println("--------------------------------------");
 //            permits();
         }
+
         Login_librarian.mainLibrarian();
     }
-    public static void addTohistory(Book book,User user){
-        Libraryservice libraryservice = Libraryservice.getInstance();
-        History history = new History();
-        book.setBookstatus(Enum.Bookstatus.BUSY);
-        history.setBookname(book.getBookname());
-        history.setBookcode(book.getBookcode());
-        history.setUserid(user.getId());
-        history.setUser(user.getName());
-        history.setBookstatus(Enum.Bookstatus.Confirm);
-        history.setBookcategory(book.getBookcategory());
-        history.setDateborrow(LocalDate.now());
-        history.setDatereturn(LocalDate.now().plusDays(7));
-        libraryservice.getHistoryList().getHistories().add(history);
-    }
+
+//    public static void addTohistory(Book book, User user) {
+//        Libraryservice libraryservice = Libraryservice.getInstance();
+//        History history = new History();
+//        book.setBookstatus(Enum.Bookstatus.BUSY);
+////        history.setBookname(book.getBookname());
+////        history.setBookcode(book.getBookcode());
+////        history.setUserid(user.getId());
+////        history.setUser(user.getName());
+//        history.setBookstatus(Enum.Bookstatus.Confirm);
+////        history.setBookcategory(book.getBookcategory());
+////        history.setDateborrow(LocalDate.now());
+////        history.setDatereturn(LocalDate.now().plusDays(7));
+////        libraryservice.getHistoryList().getHistories().add(history);
+//    }
 
     //=================================== Return STATE BOOK ============================================//
     public static void returnbook() {
@@ -329,9 +348,9 @@ public class Admin_Function {
                     if (historybook.getBookstatus().equals(Enum.Bookstatus.Confirm)) {
                         historybook.setBookstatus(Enum.Bookstatus.BLANK);
                         int x = (int) DAYS.between(historybook.getDatereturn(), LocalDate.now()); // Check DateReturn.  with DateNow.
-                        if (x>0){
-                            System.out.println(" You return book late "+x+" day(s)");
-                        }else {
+                        if (x > 0) {
+                            System.out.println(" You return book late " + x + " day(s)");
+                        } else {
                             System.out.println("Return Book Success >_<' ");
                         }
                         //**********************************************************************************//

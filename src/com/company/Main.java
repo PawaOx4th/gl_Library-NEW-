@@ -6,18 +6,14 @@ import com.company.History.HistoryList;
 import com.company.Human.UserList;
 import com.company.Service.Libraryservice;
 
-import java.time.LocalDate;
-
 public class Main {
 
     public static Object Book;
 
+
     public static void main(String[] args) {
 //
 //        //************************* Variable *************************//
-        System.out.println(LocalDate.of(2019,7,1));
-        System.out.println(LocalDate.of(2019,7,1).plusDays(7));
-        System.out.println(LocalDate.of(2019,7,1).plusDays(15));
 
         System.out.println("===========================");
         System.out.println("||                       ||");
@@ -50,8 +46,6 @@ public class Main {
         service.setHistoryList(historyList);
 
         //** Test ***//
-        System.out.println(userList.getUsers().size());
-        System.out.println(librarianList.getLibrarians().size());
         Controller.controller(books, userList, historyList);
     }
 }

@@ -2,13 +2,14 @@ package com.company.Users;
 
 import com.company.Book.Bookshelf;
 import com.company.Controller;
-import com.company.Display.librarian_display;
 import com.company.Display.user_Display;
 import com.company.History.HistoryList;
 import com.company.Human.UserList;
 import com.company.Service.Libraryservice;
 
 import java.util.InputMismatchException;
+
+//import static com.company.Librarian.Login_librarian.libraryservice;
 
 public class User_main {
     public static void login_user(Bookshelf books, UserList userList, HistoryList history) {
@@ -21,6 +22,7 @@ public class User_main {
         } else {
         }
     }
+
     public static void login_user2() {
         try {
             boolean ifCheck = true;
@@ -57,7 +59,7 @@ public class User_main {
                         User_Function.printHistory();
                         break;
                     case 6:
-                        librarian_display.library_login();
+                        Controller.controller();
                         break;
                     default:
                         System.out.println("Please Select Function");
