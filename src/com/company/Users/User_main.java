@@ -1,10 +1,7 @@
 package com.company.Users;
 
-import com.company.Book.Bookshelf;
 import com.company.Controller;
 import com.company.Display.user_Display;
-import com.company.History.HistoryList;
-import com.company.Human.UserList;
 import com.company.Service.Libraryservice;
 
 import java.util.InputMismatchException;
@@ -12,14 +9,16 @@ import java.util.InputMismatchException;
 //import static com.company.Librarian.Login_librarian.libraryservice;
 
 public class User_main {
-    public static void login_user(Bookshelf books, UserList userList, HistoryList history) {
+    public static void login_user() {
         Libraryservice libraryservice = Libraryservice.getInstance();
         User loginUser = user_Display.CheckInput();
         if (loginUser != null) {
             libraryservice.setUser(loginUser);                              //importUser from Libreryservice
             login_user2();
-            Controller.controller(books,userList,history);
+//            Controller.controller();
         } else {
+            System.out.println("[ There are not exist in database. ]\n");
+            Controller.controller();
         }
     }
 
@@ -27,13 +26,15 @@ public class User_main {
         try {
             boolean ifCheck = true;
             while (ifCheck) {
-                int ans_2 = user_Display.userManu();                        //Display Manu User [use_Display]
+                //Display Manu User [use_Display]
+                int ans_2 = user_Display.userManu();
                 switch (ans_2) {
                     case 1:
-                        int Usearch = user_Display.u_seachfunction();       //Display Seach Function [use_Display]
+                        //Display Search Function [use_Display]
+                        int Usearch = user_Display.u_seachfunction();
                         switch (Usearch) {
                             case 1:
-                                User_Function.seachBookcode();
+                                User_Function.searchBookcode();
                                 break;
                             case 2:
                                 User_Function.searchBookname();
@@ -41,16 +42,16 @@ public class User_main {
                             case 3:
                                 User_Function.searchBookcatagory();
                                 break;
-                            case 4:
-                                User_Function.searchBookstatus();
-                                break;
+//                            case 4:
+//                                User_Function.searchBookstatus();
+//                                break;
                         }
                         break;
                     case 2:
                         User_Function.changDatereturn();
                         break;
                     case 3:
-                        User_Function.rentalbook();
+                        User_Function.rentalBook();
                         break;
                     case 4:
                         User_Function.returnbook();

@@ -22,10 +22,10 @@ public class librarian_display {
     }
 
     //************ SeachDisplay Function ****************//
-    public  static  int librarian_SeachDisplay(){
+    public  static  int librarian_SearchDisplay(){
         System.out.println("Please Select Search :");
-        System.out.println("1 - Search by name\t2 - Search by Code\t" +
-                "3 - Search by Cattegory \t4 - Search by Status   ");
+        System.out.println("1-Search by name\t2-Search by Code\t" +
+                "3-Search by Category ");
         Scanner sh = new Scanner(System.in);
         int Searchf = sh.nextInt();
         return Searchf;
@@ -36,7 +36,7 @@ public class librarian_display {
         Scanner sort = new Scanner(System.in);
         System.out.println("Please input choice for Sort book ");
         System.out.println("1 - Sort by name\t2 - Sort by Code\t" +
-                "3 - Sort by Cattegory \t4 - Sort by Status   ");
+                "3 - Sort by Category");
         int SortFx = sort.nextInt();
         return SortFx;
     }

@@ -46,7 +46,7 @@ public class Main {
         service.setHistoryList(historyList);
 
         //** Test ***//
-        Controller.controller(books, userList, historyList);
+        Controller.controller();
     }
 }
 
