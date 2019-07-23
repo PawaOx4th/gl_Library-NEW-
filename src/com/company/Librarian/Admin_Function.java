@@ -224,7 +224,7 @@ public class Admin_Function {
     //=================================== SORT BOOK ============================================//
 
     //************************* Sort by name  *************************//
-    public static Comparator<Book> comparatorname = new Comparator<Book>() {
+    static Comparator<Book> comparatorname = new Comparator<Book>() {
         @Override
         public int compare(Book o1, Book o2) {
             String BookN1 = o1.getBookname().toUpperCase();
@@ -233,7 +233,7 @@ public class Admin_Function {
         }
     };
     //*************************  Sort by Code *************************//
-    public static Comparator<Book> comparatorcode = new Comparator<Book>() {
+    static Comparator<Book> comparatorcode = new Comparator<Book>() {
         @Override
         public int compare(Book o1, Book o2) {
             String BookN1 = o1.getBookcode().toUpperCase();
@@ -242,7 +242,7 @@ public class Admin_Function {
         }
     };
     //*************************   *************************//
-    public static Comparator<Book> comparatorCattegory = new Comparator<Book>() {
+    static Comparator<Book> comparatorCategory = new Comparator<Book>() {
         @Override
         public int compare(Book o1, Book o2) {
             String BookN1 = o1.getBookcategory().toString();
@@ -294,17 +294,14 @@ public class Admin_Function {
         return ch;
     }
     //=================================== Permits STATE BOOK ============================================//
-    public static void perMits() {
+    static void perMits() {
         Libraryservice libraryservice = Libraryservice.getInstance();
         History history = new History();
-        Scanner n = new Scanner(System.in);
-        System.out.println("========Bollow Book=========");
-        System.out.print("Please enter code name: ");
-        String codeS = n.nextLine();
+        String codeS = inputPermits().nextLine();
         Iterator<Book> bookIterator = libraryservice.getBooks().getBooks().iterator();
         Iterator<User> userIterator = libraryservice.getUserList().getUsers().iterator();
-        Iterator<History> historyIterator = libraryservice.getHistoryList().getHistories().iterator();
-        User user = userIterator.next();
+        /* Iterator<History> historyIterator = libraryservice.getHistoryList().getHistories().iterator(); */
+        /* User user = userIterator.next(); */
         boolean isFound = false;
         while (bookIterator.hasNext()) {
             Book book = bookIterator.next();
@@ -319,9 +316,8 @@ public class Admin_Function {
                                 book.setBookstatus(Enum.Bookstatus.BUSY);
                                 showHistory();
                             }
-                            else{
-                               // System.out.println(">>...The specified book could not be found...<<\n");
-                            }
+                            // System.out.println(">>...The specified book could not be found...<<\n");
+
                         }
                     } catch (ConcurrentModificationException ignored) {
                     }
@@ -344,14 +340,17 @@ public class Admin_Function {
 
         Login_librarian.mainLibrarian();
     }
+    private static Scanner inputPermits(){
+        Scanner n = new Scanner(System.in);
+        System.out.println("========Bollow Book=========");
+        System.out.print("Please enter code name: ");
+        return n;
+    }
 
     //=================================== Return STATE BOOK ============================================//
-    public static void returnbook() {
+    static void returnbook() {
         Libraryservice libraryservice = Libraryservice.getInstance();
-        Scanner n = new Scanner(System.in);
-        System.out.println("========Return Book=========");
-        System.out.println("Please enter book code: ");
-        String bookCode = n.nextLine();
+        String bookCode = inputRetrunbook().nextLine();
         Iterator<History> historyIterator = libraryservice.getHistoryList().getHistories().iterator();
         boolean returnbook = false;
         while (historyIterator.hasNext()) {
@@ -382,13 +381,17 @@ public class Admin_Function {
                 } else {
                     System.out.println("Book is not");
                 }
-            } else {
-
             }
         }
         if (!returnbook) {
             System.out.println("Please Again Enter Book Code");
         }
+    }
+    private static Scanner inputRetrunbook(){
+        Scanner n = new Scanner(System.in);
+        System.out.println("========Return Book=========");
+        System.out.println("Please enter book code: ");
+        return  n ;
     }
 }
 

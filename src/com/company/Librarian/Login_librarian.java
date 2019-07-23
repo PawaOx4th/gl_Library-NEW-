@@ -73,7 +73,7 @@ public class Login_librarian {
                                 }
                                 break;
                             case 3:
-                                libraryservice.getBooks().getBooks().sort(Admin_Function.comparatorCattegory);  //coloections.sort('List Book),'Class'.'Comparator object'
+                                libraryservice.getBooks().getBooks().sort(Admin_Function.comparatorCategory);  //coloections.sort('List Book),'Class'.'Comparator object'
                                 for (Book book : libraryservice.getBooks().getBooks()) {
                                     System.out.println(book);
                                 }

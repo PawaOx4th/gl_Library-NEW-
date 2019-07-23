@@ -161,11 +161,9 @@ class User_Function {
     static void rentalBook(){
         Libraryservice libraryservice = Libraryservice.getInstance();                   //success
         History history = new History();
-        Scanner inputrentalCode = new Scanner(System.in);
         UUID uuid = UUID.randomUUID();
         String randomUUIDString = uuid.toString();
-        System.out.print("Book Code: ");
-        String code = inputrentalCode.nextLine();
+        String code = inputrentalCode().nextLine();
         boolean isState = false;
         for (Book book : libraryservice.getBooks().getBooks()) {
             if (book.getBookcode().equalsIgnoreCase(code)) {
@@ -182,21 +180,22 @@ class User_Function {
                     history.setUserid(libraryservice.getUser().getId());                //UserID
                     libraryservice.getHistoryList().getHistories().add(history);
                     printHistory();
-                } else {
-                    System.out.println("'Sorry your book is not exist to my Grouplease Library");
-                }
+                } else System.out.println("'Sorry your book is not exist to my Grouplease Library");
             }
+            User_main.login_user2();
         }
         if (!isState) { System.out.println("Please Again Enter Book Code");}
+    }
+    private static Scanner inputrentalCode(){
+        System.out.print("Book Code: ");
+        Scanner inputcode = new Scanner(System.in);
+        return inputcode;
     }
 
     /*=========================================== Return STATE BOOK ==============================================*/
     static void returnbook(){
         Libraryservice libraryservice = Libraryservice.getInstance();
-        Scanner n = new Scanner(System.in);
-        System.out.println("========Return Book=========");
-        System.out.println("Please enter book code: ");
-        String bookCode = n.nextLine();
+        String bookCode = inputreturnBook().nextLine();
         Iterator<History>historyIterator = libraryservice.getHistoryList().getHistories().iterator();
         boolean returnbook = false;
         while (historyIterator.hasNext()) {
@@ -221,6 +220,12 @@ class User_Function {
             }
         }
         if (!returnbook){ System.out.println("Please Again Enter Book Code");}
+    }
+    private static Scanner inputreturnBook(){
+        System.out.println("========Return Book=========");
+        System.out.println("Please enter book code: ");
+        Scanner inputCode = new Scanner(System.in);
+        return inputCode;
     }
 
 }

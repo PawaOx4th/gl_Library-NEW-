@@ -122,4 +122,7 @@ public class Book {
 
     public void setBollow(String dd_llll_yyyy) {
     }
+
+    public void setBookcategory(String manga) {
+    }
 }

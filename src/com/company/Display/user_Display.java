@@ -48,8 +48,7 @@ public class user_Display {
     }
 
     public static int u_seachfunction(){
-        System.out.println("[1-Search by Code]\t[2-Search by Name]\t[3-Search by Category]\t" +
-                "[4-Search by Status]");
+        System.out.println("[1-Search by Code]\t[2-Search by Name]\t[3-Search by Category]\t" );
         System.out.print("Please select function : ");
         Scanner usearch = new Scanner(System.in);
         int Usearch = usearch.nextInt();
